@@ -1,0 +1,32 @@
+# Cursor Rules for landingpage-parallax
+
+## Architecture
+- Build a single-page storytelling experience using React 18 with TypeScript.
+- Use Tailwind CSS for layout/styling; keep custom CSS in `src/styles` only when utility classes are insufficient.
+- Organize UI into sections under `src/sections/` and reusable pieces under `src/components/`.
+- Store parallax/animation helpers in `src/lib/` and constants/content in `src/content/`.
+
+## Animation & Scrolling
+- Use Framer Motion for declarative animations; colocate Motion variants near components.
+- Use Lenis for smooth scrolling; initialize it once inside `src/main.tsx` and expose helpers from `src/lib/scroll.ts`.
+- Prefer transform/opacity-based effects for performance; avoid expensive layout-triggering properties.
+- Keep scroll listeners centralized; do not attach raw `window.addEventListener` in components.
+
+## Code Quality
+- Write TypeScript types for props and shared data models.
+- Keep components under 150 lines; split out hooks/utilities as needed.
+- Document tricky animation math with concise comments.
+- Use functional Tailwind classes; avoid magic colors/sizes—extend Tailwind theme instead.
+
+## Tooling
+- Use Bun scripts (`bun dev`, `bun run build`) for local development/builds.
+- When adding dependencies prefer Bun's `bun add`.
+- Configure ESLint + Prettier with settings compatible with React/TS + Tailwind.
+
+## Testing & Verification
+- Provide smoke tests with Vitest + React Testing Library for key sections when feasible.
+- Always run `bun run lint` and `bun run build` before delivering major changes.
+
+## Content Strategy
+- Narrative flow: Hero intro → Product/story context → Feature highlights with parallax reveals → Gallery/Showcase → CTA.
+- Use lazy-loaded assets for heavy media and keep image dimensions defined to prevent layout shifts.
