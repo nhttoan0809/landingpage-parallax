@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "homepage": "https://nhttoan0809.github.io/landingpage-parallax",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

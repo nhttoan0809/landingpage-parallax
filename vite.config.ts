@@ -3,7 +3,10 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
+const repositoryBase = '/landingpage-parallax/'
+
 export default defineConfig({
+  base: process.env.VITE_GITHUB_PAGES === 'true' ? repositoryBase : '/',
   plugins: [react()],
   resolve: {
     alias: {
