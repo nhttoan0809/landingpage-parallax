@@ -9,10 +9,12 @@
 
 # 🧰 Công nghệ đề xuất:
 
-- React + Framer Motion (animation)
+- React + Typescript + Framer Motion (animation)
 - Lenis hoặc Locomotive Scroll (cuộn mượt)
 - TailwindCSS (layout nhanh)
 - BunJS (SPA - Build static files to serve server-less)
+- Vitest
+- Biome (format, lint)
 
 # ✅ Kỹ năng thể hiện:
 
