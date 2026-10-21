@@ -29,9 +29,12 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run tests
-        run: bun run test -- --run
+        run: bun run test --run
 
-      - name: Build site
+      - name: Lint collection and landing pages
+        run: bun run lint
+
+      - name: Build all pages and verify CSS isolation
         env:
           VITE_GITHUB_PAGES: 'true'
         run: bun run build

@@ -6,7 +6,7 @@
   "homepage": "https://nhttoan0809.github.io/landingpage-parallax",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/verify-build.mjs",
     "preview": "vite preview",
     "lint": "eslint src --max-warnings=0",
     "format": "prettier --check .",

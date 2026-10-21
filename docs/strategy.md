@@ -1,50 +1,44 @@
-# Implementation Strategy
+# Collection architecture
 
-## Goal
-Build a parallax-driven storytelling landing page that demonstrates smooth scrolling, rich animations, and strong performance.
+## Decision: separate documents for separate visual identities
 
-## Phase 1 – Foundations
-1. **Project Setup**
-   - Scaffold a Bun + React + TypeScript project via Vite template.
-   - Add Tailwind CSS with PostCSS/Autoprefixer, configure theme tokens for colors, spacing, and typography.
-   - Install Framer Motion for animation primitives and Lenis for smooth scrolling.
-   - Configure ESLint + Prettier + Tailwind plugin; add Vitest + React Testing Library for smoke tests.
-2. **Global Structure**
-   - Define base layout in `App.tsx` with a semantic wrapper and global providers (Lenis, SmoothScrollContext).
-   - Implement design tokens (fonts, colors) inside `tailwind.config.cjs`.
+The catalog is a neutral index. A landing is an independent browser document,
+not a child route inheriting a shared layout. Vite's multi-page build writes a
+real `dist/<slug>/index.html`, which static hosting can resolve directly.
+See the [Vite 7 MPA guide](https://v7.vite.dev/guide/build.html#multi-page-app).
 
-## Phase 2 – Narrative Sections
-1. **Hero Section** (`src/sections/Hero.tsx`)
-   - Full viewport canvas with layered parallax background.
-   - Animated headline and subcopy that respond to scroll progress.
-   - CTA button linking to CTA section.
-2. **Story Section** (`src/sections/Story.tsx`)
-   - Timeline-style copy with subtle fade/slide transitions triggered by scroll progress.
-   - Use Framer Motion `useScroll` hooks to control opacity/translate.
-3. **Feature Highlights** (`src/sections/Features.tsx`)
-   - Cards pinned while background layers parallax in opposing directions.
-   - Lazy-load illustrations with `loading="lazy"` and defined aspect ratios.
-4. **Gallery Showcase** (`src/sections/Gallery.tsx`)
-   - Horizontal scroll simulation triggered by vertical scroll using `transform: translateX`.
-   - Apply subtle scale/rotate for depth.
-5. **Call to Action** (`src/sections/CTA.tsx`)
-   - High-contrast block with final CTA, including bounce-in animation.
+Each brand owns its entry, providers, reset, selectors, tokens, fonts, and asset
+namespace. A navigation loads a new document, so even `body`, `:root`, keyframes,
+and common class names cannot leak between brands. This deliberately trades SPA
+transitions for predictable style isolation and straightforward static hosting.
+CSS Modules help component-local organization, but document isolation is what
+protects independent brands, including their global resets and HTML metadata.
 
-## Phase 3 – Enhancements
-1. **Performance Tuning**
-   - Preload critical fonts; compress/optimize sample assets.
-   - Use `motion.div` transforms only; avoid expensive shadows.
-   - Enable Tailwind `@layer utilities` for perspective helper classes.
-2. **Accessibility**
-   - Ensure semantic headings, aria labels for galleries, focus-visible styling for CTAs.
-   - Provide reduced-motion fallback by respecting `prefers-reduced-motion`.
-3. **Navigation & Gallery Polish**
-   - Drive the navigation highlight strictly from intersection ratios so the active state reflects the section that is at least 50% in view.
-   - Constrain gallery parallax translation to the measured scroll width so all cards stay within the viewport frame while animating.
-4. **Testing & Validation**
-   - Add basic snapshot/smoke tests ensuring each section renders without runtime errors.
-   - Run `bun run lint` and `bun run build` before delivery.
+## Build and registry
 
-## Phase 4 – Delivery
-- Compile production bundle via `bun run build` and verify output in `dist/`.
-- Update documentation with usage instructions and notable decisions.
+`src/landings/registry.ts` contains plain metadata only. The catalog uses it to
+render real links; Vite uses each slug to include `<slug>/index.html` in its
+Rollup inputs. The root `index.html` is always included. Avoid any component,
+CSS, environment-specific browser code, or provider imports in this registry.
+
+`cssCodeSplit` remains enabled. The emitted manifest lets `verify-build.mjs`
+follow CSS through direct, shared, and dynamic chunks. It rejects shared CSS
+between document entries. Shared JS vendor chunks without styles are allowed.
+No common visual stylesheet, brand theme, or Tailwind preflight is injected.
+
+## Paths and deployment
+
+Use BASE_URL for catalog links, landing return links, and public asset paths.
+Local paths are `/` and `/luma/`; the GitHub Pages build prefixes these with
+`/landingpage-parallax/`. Preserve ordinary `#section` anchors inside Luma.
+CI uploads all of `dist/`. No SPA fallback or rewrite is needed for these routes.
+
+## Verification
+
+Check lint, tests, the production build/CSS guard, and a GitHub Pages base build.
+In a browser, verify direct navigation and reload, catalog → landing → catalog,
+back navigation, images, stylesheets, font ownership, and absence of Luma runtime
+in the catalog. Check Luma's parallax, gallery, dialog, and downloads after moving
+files. Review mobile layout and reduced motion for both documents.
+
+For Luma's visual design, assets, and interactions see `landings/luma/design.md`.
