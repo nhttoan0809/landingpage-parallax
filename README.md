@@ -1,127 +1,108 @@
-# Landing page collection
+# Landing Page Collection ✦
 
-Repo tập hợp các mẫu landing page của tôi. Mỗi thương hiệu có câu chuyện,
-phong cách thiết kế và trải nghiệm riêng; trang chủ là danh sách để khám phá.
+> **Bộ sưu tập trang giới thiệu sản phẩm cao cấp với nghệ thuật kể chuyện thị giác (Visual Storytelling) đỉnh cao qua hiệu ứng cuộn đa tầng Parallax mượt mà 60fps. Mẫu tiêu biểu Luma Field kết nối vẻ đẹp thiên nhiên hoang sơ với thiết kế máy ảnh du lịch tinh xảo, tích hợp trình điều khiển màu sắc tương tác, cuộn quán tính Lenis và chuẩn tiếp cận người dùng toàn diện.**
 
-## Các trang hiện có
+**Dự án của Toàn Nguyễn** · Thiết kế & Phát triển trải nghiệm tương tác Web (Creative Frontend)
 
-| Endpoint | Mẫu                                 | Phong cách                        |
-| -------- | ----------------------------------- | --------------------------------- |
-| `/`      | Danh mục landing page               | Tối giản, tập trung vào danh sách |
-| `/luma/` | Luma Field — máy ảnh du lịch hư cấu | Thiên nhiên, editorial, parallax  |
+[![Live Demo](https://img.shields.io/badge/Demo-GitHub_Pages-22c55e?style=for-the-badge&logo=github)](https://nhttoan0809.github.io/landingpage-parallax)
+[![React](https://img.shields.io/badge/React-19.1-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.1-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-v12-FF4154?style=for-the-badge&logo=framer)](https://motion.dev/)
+[![Lenis](https://img.shields.io/badge/Lenis-Smooth_Scroll-000000?style=for-the-badge)](https://github.com/darkroomengineering/lenis)
 
-Luma giữ các hiệu ứng parallax nhiều lớp, gallery chuyển cảnh bằng bàn phím,
-chọn màu máy và tải cấu hình sản phẩm ý tưởng. Sản phẩm, thông số và giá là hư cấu.
+[Xem tính năng](#features) · [Tài liệu kỹ thuật & cài đặt](TECHNICAL.md)
 
-## Chạy dự án
+<p align="center">
+  <img src="public/landings/luma/images/luma-camera.png" alt="Hình minh họa máy ảnh du lịch ý tưởng Luma Field" width="680">
+</p>
 
-```bash
-bun install --frozen-lockfile
-bun run dev
-```
+_Hình sản phẩm ý tưởng Luma Field, được tạo bằng AI; đây là tài nguyên minh họa của trang giới thiệu._
 
-Mở `http://localhost:5173/` để xem danh mục hoặc
-`http://localhost:5173/luma/` để vào Luma. Dev/preview chuyển `/luma` thành
-`/luma/`; các liên kết trong repo dùng URL có dấu `/` cuối.
+---
 
-```bash
-bun run lint
-bun run test --run
-bun run build
-bun run preview
-```
+## 🌟 Trải Nghiệm Trực Tuyến (Live Website)
 
-## Vì sao CSS độc lập?
+- **Trang chủ danh mục (Catalog):** [https://nhttoan0809.github.io/landingpage-parallax](https://nhttoan0809.github.io/landingpage-parallax)
+- **Mẫu sản phẩm Luma Field:** [https://nhttoan0809.github.io/landingpage-parallax/luma/](https://nhttoan0809.github.io/landingpage-parallax/luma/)
 
-Repo sử dụng **Vite multi-page app (MPA)**, không ghép tất cả mẫu vào một SPA.
-Mỗi URL là một tài liệu HTML riêng, với entry JavaScript, stylesheet, reset,
-font, favicon và provider riêng. Chuyển giữa các mẫu bằng liên kết HTML thông
-thường sẽ tạo tài liệu mới; CSS của trang trước không còn trong trang sau.
+---
 
-Trang danh mục chỉ import **metadata** và ảnh preview. Nó không import component,
-CSS, font hay Lenis của Luma. CSS Modules dùng cho component của danh mục; mỗi
-landing tự quản lý hệ thống style. Các selector như `body`, `:root`, `.button`
-trong Luma chỉ tác động đến tài liệu Luma.
+<a id="overview"></a>
 
-Vite tách CSS theo entry. Bước build chạy `scripts/verify-build.mjs` để duyệt
-manifest và báo lỗi nếu bất kỳ stylesheet nào được dùng chung giữa hai tài liệu.
-Thư viện JavaScript nền tảng như React vẫn có thể được Vite dùng chung để tận dụng
-cache; điều đó không tạo ra theme hay stylesheet dùng chung.
+## 📌 Executive Summary (Tổng quan dự án)
 
-Tailwind hiện được giữ trong dependencies nhưng không bật toàn cục. Không có
-preflight hoặc theme chung; trang mới muốn dùng Tailwind phải thiết lập riêng
-trong phạm vi trang đó. CSS hiện tại được xử lý bằng Autoprefixer.
+| Thông số               | Chi tiết                                                                       |
+| :--------------------- | :----------------------------------------------------------------------------- |
+| **Project Name**       | **Landing Page Collection**                                                    |
+| **Project Type**       | Bộ sưu tập landing page nghệ thuật, ứng dụng chuyển động và thị giác phong phú |
+| **Đối tượng sử dụng**  | Khách hàng cao cấp, người yêu công nghệ/nhiếp ảnh và các nhà phát triển web    |
+| **Phạm vi phát triển** | Thiết kế concept, hiệu ứng chuyển động đa tầng, âm hưởng thị giác và tối ưu UX |
+| **Trạng thái**         | Hoàn thiện trang danh mục và sản phẩm mẫu máy ảnh du lịch ý tưởng Luma Field   |
 
-## Cấu trúc
+---
 
-```text
-index.html                       # Tài liệu danh mục tại /
-luma/index.html                  # Tài liệu Luma tại /luma/
-src/
-  catalog/                       # Entry, giao diện, CSS, tests của danh mục
-  landings/
-    registry.ts                  # Metadata và danh sách entry cho Vite
-    luma/
-      main.tsx                   # Mount React và provider riêng
-      App.tsx
-      index.css                  # Reset, token, CSS chỉ của Luma
-      components/
-      sections/
-      lib/
-      content/
-      __tests__/
-      AGENTS.md
-  setupTests.ts                  # Hạ tầng kiểm thử
-public/
-  catalog.svg
-  landings/luma/                 # Images và favicon của Luma
-docs/
-  strategy.md                    # Kiến trúc collection
-  landings/luma/                 # Thiết kế, nguồn ảnh, prompt ảnh sản phẩm
-scripts/verify-build.mjs          # Kiểm tra các tài liệu không dùng chung CSS
-```
+<a id="problem-solution"></a>
 
-## Thêm landing page mới
+## 🎯 Problem & Solution (Bài toán & Giải pháp)
 
-Ví dụ tạo mẫu thương hiệu `orbit`:
+- **Problem:** Đa số các trang landing page thương mại điện tử hiện nay đi theo khuôn mẫu tĩnh đơn điệu, thiếu cảm xúc và không truyền tải được linh hồn hay câu chuyện phía sau sản phẩm, dẫn đến tỉ lệ thoát trang cao và mức độ gắn kết thấp.
+- **Solution:** Thiết kế trải nghiệm cuộn điện ảnh (Cinematic Scroll) đưa người xem qua một hành trình khám phá tuần tự: từ phong cảnh thiên nhiên rộng mở, các góc cắt cấu tạo máy ảnh, bộ ảnh chụp thực địa sống động đến cấu hình phiên bản màu sắc theo sở thích. Tất cả được điều phối nhịp nhàng bằng Framer Motion và thuật toán cuộn mượt Lenis.
 
-1. Tạo `orbit/index.html`, khai báo metadata và font riêng. Entry script:
-   `<script type="module" src="/src/landings/orbit/main.tsx"></script>`.
-2. Tạo `src/landings/orbit/` chứa entry, component, reset, token, CSS và tests riêng.
-   Provider/animation chỉ khởi tạo từ entry của Orbit.
-3. Đặt tài nguyên vào `public/landings/orbit/`. Trong TSX dùng
-   `${import.meta.env.BASE_URL}landings/orbit/...`; trong HTML dùng `%BASE_URL%`.
-4. Thêm metadata vào `src/landings/registry.ts` với `slug: "orbit"`, tên,
-   mô tả, phong cách và ảnh preview. Trang chủ tự liệt kê và Vite tự đưa
-   `orbit/index.html` vào build.
-5. Cập nhật bảng danh mục trong README và chạy đầy đủ kiểm tra.
+---
 
-Không import CSS hoặc component của các mẫu khác để tái sử dụng giao diện.
-Tham khảo [AGENTS.md](AGENTS.md) cho quy tắc kỹ thuật đầy đủ.
+<a id="features"></a>
 
-## GitHub Pages
+## ✨ Key Features (Tính năng nổi bật)
 
-```bash
-VITE_GITHUB_PAGES=true bun run build
-VITE_GITHUB_PAGES=true bun run preview
-```
+| Mẫu                | Điểm đáng khám phá                                                                                                             |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| **Trang danh mục** | Giao diện tối giản mang phong cách editorial, điều hướng mượt mà đến từng mẫu sản phẩm chuyên biệt                             |
+| **Luma Field**     | Hành trình thị giác khép kín từ phong cảnh thiên nhiên, chi tiết thiết kế máy ảnh, bộ sưu tập hình ảnh và tùy chọn cấu hình máy |
 
-Với tên repo hiện tại, các đường dẫn public là:
+Với **Luma Field**, người xem có thể:
 
-- Danh mục: `/landingpage-parallax/`
-- Luma: `/landingpage-parallax/luma/`
+- Khám phá các lớp phong cảnh và sản phẩm chuyển động theo thao tác cuộn.
+- Chuyển giữa ba cảm hứng hình ảnh bằng chuột hoặc bàn phím.
+- Chọn màu máy và tải bản tóm tắt cấu hình để lưu lại.
+- Theo dõi nội dung với trải nghiệm có xét tùy chọn giảm chuyển động.
 
-Workflow `.github/workflows/deploy.yml` build và upload toàn bộ `dist/`, gồm
-`dist/index.html` và `dist/luma/index.html`. Các URL con có file HTML thật nên
-hỗ trợ mở trực tiếp và refresh mà không cần SPA rewrite hay trang 404 chuyển hướng.
-Nếu đổi tên repo, sửa `repositoryBase` trong `vite.config.ts` và `homepage`
-trong `package.json`.
+_Sản phẩm, thông số và giá của Luma Field là hư cấu. Trải nghiệm lựa chọn bộ máy không tạo đơn hàng hay phát sinh thanh toán._
 
-## Thiết kế và skills
+---
 
-[Định hướng Luma, nguồn ảnh](docs/landings/luma/design.md) ·
-[Prompt ảnh máy ảnh](docs/landings/luma/camera-image-prompt.txt) ·
-[Skills frontend](docs/frontend-skills.md)
+<a id="contributions"></a>
 
-Ảnh máy ảnh được tạo bằng ImageGen; ảnh thiên nhiên từ Unsplash để minh họa.
-Mỗi mẫu mới được tự chọn ngôn ngữ hình ảnh và cách tương tác phù hợp.
+## 👨‍💻 Competencies & Contributions (Năng lực & Đóng góp)
+
+- **Tư duy hình ảnh:** Kết nối bố cục, màu sắc, hình ảnh và nội dung theo tinh thần sản phẩm.
+- **Kể chuyện qua tương tác:** Dùng chuyển động để dẫn dắt việc khám phá, kết hợp với các thao tác chọn và lưu cấu hình.
+- **Chú ý khả năng tiếp cận:** Xem xét thao tác bàn phím và nhu cầu giảm chuyển động.
+- **Tổ chức sản phẩm:** Xây dựng bộ sưu tập có thể bổ sung những mẫu mang bản sắc khác nhau.
+
+---
+
+<a id="roadmap"></a>
+
+## 📈 Future Roadmap (Hướng phát triển)
+
+- [ ] Bổ sung mẫu giới thiệu sản phẩm cho các lĩnh vực khác.
+- [ ] Mở rộng bộ sưu tập với những bản sắc và cách tương tác riêng.
+
+---
+
+<a id="author"></a>
+
+## 👤 Author & Contact
+
+- **Tác giả:** Toàn Nguyễn
+- **GitHub:** [@nhttoan0809](https://github.com/nhttoan0809)
+- **Tài khoản sinh viên (cùng tác giả):** [@toanb1805926](https://github.com/toanb1805926)
+
+---
+
+<a id="license"></a>
+
+## 📄 License
+
+Xem [thông tin giấy phép và tài nguyên bên thứ ba](TECHNICAL.md#license).
