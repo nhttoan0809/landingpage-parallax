@@ -1,0 +1,16 @@
+{
+  "before": 0,
+  "afterHorizontal": 0,
+  "afterVertical": 285,
+  "viewport": [
+    390,
+    844
+  ],
+  "dpr": 2,
+  "canvasPixels": [
+    516,
+    537
+  ],
+  "touchAction": "pan-y",
+  "method": "Chrome CDP trusted touch input in responsive emulation. Not a physical mobile GPU test."
+}

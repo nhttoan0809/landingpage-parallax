@@ -1,0 +1,100 @@
+{
+  "durationMs": 30015.5,
+  "rafFrames": 1801,
+  "averageRafFps": 60.002332128400326,
+  "renderedFrames": 1802,
+  "averageViewerFps": 60.03564824840499,
+  "p95FrameIntervalMs": 16.700000000000728,
+  "maxFrameIntervalMs": 16.80000000000291,
+  "viewport": [
+    1440,
+    1000
+  ],
+  "devicePixelRatio": 2,
+  "canvasPixels": [
+    1188,
+    940
+  ],
+  "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "resources": [
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/fonts/BarlowCondensed-ExtraBoldItalic.ttf",
+      "encodedBodySize": 113004,
+      "decodedBodySize": 113004,
+      "transferSize": 113304
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/assets/apex-velocity-D5V2uHve.js",
+      "encodedBodySize": 52975,
+      "decodedBodySize": 137337,
+      "transferSize": 53275
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/assets/client-DUzeO-QE.js",
+      "encodedBodySize": 58834,
+      "decodedBodySize": 187365,
+      "transferSize": 59134
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/assets/apex-velocity-Bo2sejFT.css",
+      "encodedBodySize": 4859,
+      "decodedBodySize": 20403,
+      "transferSize": 5159
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/fonts/Barlow-Regular.ttf",
+      "encodedBodySize": 104068,
+      "decodedBodySize": 104068,
+      "transferSize": 104368
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/ignition.webp",
+      "encodedBodySize": 34048,
+      "decodedBodySize": 34048,
+      "transferSize": 34348
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/favicon.svg",
+      "encodedBodySize": 188,
+      "decodedBodySize": 188,
+      "transferSize": 488
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/assets/viewer-engine-B3rHzzpZ.js",
+      "encodedBodySize": 137950,
+      "decodedBodySize": 551259,
+      "transferSize": 138250
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/on-track.svg",
+      "encodedBodySize": 688,
+      "decodedBodySize": 1809,
+      "transferSize": 988
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/afterhours.webp",
+      "encodedBodySize": 32534,
+      "decodedBodySize": 32534,
+      "transferSize": 32834
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/saltline.webp",
+      "encodedBodySize": 32076,
+      "decodedBodySize": 32076,
+      "transferSize": 32376
+    },
+    {
+      "url": "http://127.0.0.1:4180/landingpage-parallax/landings/apex-velocity/off-track.svg",
+      "encodedBodySize": 608,
+      "decodedBodySize": 1259,
+      "transferSize": 908
+    }
+  ],
+  "test": "30s warmed desktop story viewer; sinusoidal scroll through pinned scrub range; browser RAF intervals plus actual viewer frame counter",
+  "networkSummary": {
+    "encodedResourceBytes": 571832,
+    "encodedVisualFontBytes": 317214,
+    "resourceCount": 12
+  }
+}

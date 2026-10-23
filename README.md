@@ -60,6 +60,7 @@ _Hình sản phẩm ý tưởng Luma Field, được tạo bằng AI; đây là 
 | Mẫu                | Điểm đáng khám phá                                                                                                             |
 | :----------------- | :----------------------------------------------------------------------------------------------------------------------------- |
 | **Trang danh mục** | Giao diện tối giản mang phong cách editorial, điều hướng mượt mà đến từng mẫu sản phẩm chuyên biệt                             |
+| **Apex Velocity** | Thương hiệu đua xe hư cấu, mũ 3D tương tác, story pin/scrub và cấu hình ba phiên bản. [Tài liệu & cách chạy](docs/landings/apex-velocity/design.md) · URL `/apex-velocity/` |
 | **Luma Field**     | Hành trình thị giác khép kín từ phong cảnh thiên nhiên, chi tiết thiết kế máy ảnh, bộ sưu tập hình ảnh và tùy chọn cấu hình máy |
 
 Với **Luma Field**, người xem có thể:

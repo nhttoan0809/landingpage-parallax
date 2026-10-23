@@ -1,0 +1,23 @@
+{
+  "first": {
+    "x": -1.5,
+    "mask": "polygon(95% 0%, 100% 0%, 100% 100%, 95% 100%)",
+    "panelTop": 78
+  },
+  "forward": {
+    "x": -25.5,
+    "mask": "polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%)",
+    "panelTop": 78
+  },
+  "reversed": {
+    "x": -1.5,
+    "mask": "polygon(95% 0%, 100% 0%, 100% 100%, 95% 100%)",
+    "panelTop": 78
+  },
+  "released": {
+    "x": -29.9748,
+    "mask": "polygon(0.0839% 0%, 100% 0%, 100% 100%, 0.0839% 100%)",
+    "panelTop": -922
+  },
+  "method": "Finite 1000px pin; bidirectional headline transform/mask assertions and real model screenshots at each sampled pose."
+}

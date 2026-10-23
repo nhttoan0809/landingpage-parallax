@@ -1,0 +1,25 @@
+{
+  "filesBytes": {
+    "ignition.webp": 34048,
+    "preview.webp": 40562,
+    "saltline.webp": 32076,
+    "on-track.svg": 1809,
+    "credits.txt": 831,
+    "off-track.svg": 1259,
+    "afterhours.webp": 32534,
+    "favicon.svg": 188,
+    "fonts/OFL.txt": 4377,
+    "fonts/Barlow-Regular.ttf": 104068,
+    "fonts/BarlowCondensed-ExtraBoldItalic.ttf": 113004
+  },
+  "allBrandPublicBytes": 364756,
+  "allVisualAndFontBytes": 359548,
+  "visualMiB": 0.3428916931152344,
+  "modelNetworkAssetsBytes": 0,
+  "modelNote": "No external model or texture asset; original geometry/paint code is included in deferred viewer-engine JS. Canvas paint texture is generated at runtime (1024 x 512 RGBA = 2 MiB per viewer before mipmaps).",
+  "buildChunksBytes": {
+    "assets/viewer-engine-B3rHzzpZ.js": 551259,
+    "assets/apex-velocity-D5V2uHve.js": 137337,
+    "assets/apex-velocity-Bo2sejFT.css": 20403
+  }
+}
