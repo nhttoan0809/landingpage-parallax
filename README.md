@@ -13,6 +13,8 @@
 
 [Xem tính năng](#features) · [Tài liệu kỹ thuật & cài đặt](TECHNICAL.md)
 
+[Nghiên cứu phong cách web, thuật ngữ và 3 task triển khai độc lập](docs/research/creative-web/README.md)
+
 <p align="center">
   <img src="public/landings/luma/images/luma-camera.png" alt="Hình minh họa máy ảnh du lịch ý tưởng Luma Field" width="680">
 </p>
