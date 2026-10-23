@@ -1,0 +1,94 @@
+@font-face {
+  font-family: Manrope;
+  src: url("/landings/aether-story/fonts/manrope-latin.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 200 800;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/landings/aether-story/fonts/cormorant-latin.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+:root {
+  font-family: Manrope, Arial, sans-serif;
+  color: #272536;
+  background: #eeedf4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --paper: #eeedf4;
+  --ink: #272536;
+  --muted: #686273;
+  --accent: #785c91;
+  --night: #171522;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+}
+button:disabled {
+  cursor: wait;
+}
+button {
+  border: 0;
+}
+button,
+a,
+label,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+:focus-visible {
+  outline: 2px solid #8053ad;
+  outline-offset: 5px;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+button,
+a,
+input,
+select {
+  scroll-margin-top: 110px;
+}
+::selection {
+  background: #d6c1ec;
+  color: #272536;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

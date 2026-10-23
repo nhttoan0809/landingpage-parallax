@@ -1,0 +1,61 @@
+{
+  "method": "WCAG relative luminance of actual foreground/background token pairs; loading opacity is 1. This is not a complete automated accessibility audit.",
+  "pairs": [
+    {
+      "name": "Body on paper",
+      "foreground": "#272536",
+      "background": "#eeedf4",
+      "ratio": 12.86,
+      "minimum": 4.5
+    },
+    {
+      "name": "Muted on paper",
+      "foreground": "#686273",
+      "background": "#eeedf4",
+      "ratio": 5.04,
+      "minimum": 4.5
+    },
+    {
+      "name": "Project text on night",
+      "foreground": "#c4bdcf",
+      "background": "#171522",
+      "ratio": 9.88,
+      "minimum": 4.5
+    },
+    {
+      "name": "CTA",
+      "foreground": "#faf9ff",
+      "background": "#272536",
+      "ratio": 14.29,
+      "minimum": 4.5
+    },
+    {
+      "name": "Case body",
+      "foreground": "#686273",
+      "background": "#f2eff7",
+      "ratio": 5.15,
+      "minimum": 4.5
+    },
+    {
+      "name": "Case label",
+      "foreground": "#74657e",
+      "background": "#f2eff7",
+      "ratio": 4.73,
+      "minimum": 4.5
+    },
+    {
+      "name": "Error",
+      "foreground": "#9d2849",
+      "background": "#f8f7fb",
+      "ratio": 6.95,
+      "minimum": 4.5
+    },
+    {
+      "name": "Loading status",
+      "foreground": "#575262",
+      "background": "#f5f3f9",
+      "ratio": 6.84,
+      "minimum": 4.5
+    }
+  ]
+}

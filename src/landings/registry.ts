@@ -12,6 +12,16 @@ export type LandingPage = {
 
 export const landingPages: readonly LandingPage[] = [
   {
+    slug: "aether-story",
+    name: "Aether Studio",
+    category: "Studio sáng tạo · Câu chuyện 3D",
+    description:
+      "Một ý tưởng cất cánh. Bốn chương về phượng hoàng kính, ba dự án concept và bảng tùy chỉnh ánh sáng của riêng bạn.",
+    styles: ["WebGL", "Scrollytelling", "Tương tác"],
+    preview: "landings/aether-story/preview.webp",
+    previewAlt: "Phượng hoàng kính Aether trên nền bạc tím khói",
+  },
+  {
     slug: "luma",
     name: "Luma Field",
     category: "Máy ảnh du lịch",

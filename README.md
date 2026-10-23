@@ -23,6 +23,13 @@ _Hình sản phẩm ý tưởng Luma Field, được tạo bằng AI; đây là 
 
 ---
 
+## Danh mục landing page
+
+| Landing | URL | Đặc trưng | Tài liệu |
+| --- | --- | --- | --- |
+| Luma Field | `/luma/` | Máy ảnh, thiên nhiên, parallax | [Design](docs/landings/luma/design.md) |
+| Aether Studio | `/aether-story/` | Phượng hoàng kính WebGL, bốn chương, case study và customizer | [Design](docs/landings/aether-story/design.md) · [Validation](docs/landings/aether-story/validation.md) |
+
 ## 🌟 Trải Nghiệm Trực Tuyến (Live Website)
 
 - **Trang chủ danh mục (Catalog):** [https://nhttoan0809.github.io/landingpage-parallax](https://nhttoan0809.github.io/landingpage-parallax)

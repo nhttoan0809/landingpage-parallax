@@ -1,0 +1,402 @@
+{
+  "base": "http://127.0.0.1:4182/",
+  "date": "2026-10-23T15:55:32.120Z",
+  "browser": "155.0.8059.85",
+  "checks": [
+    {
+      "name": "Catalog owns its stylesheet and does not load Aether scene, fonts or Lenis",
+      "resources": [
+        "http://127.0.0.1:4182/assets/catalog-D4ll1gvs.js",
+        "http://127.0.0.1:4182/assets/client-DUzeO-QE.js",
+        "http://127.0.0.1:4182/assets/catalog-kUy1tpZD.css",
+        "http://127.0.0.1:4182/landings/aether-story/preview.webp",
+        "http://127.0.0.1:4182/landings/luma/images/alpine-lake.jpg",
+        "http://127.0.0.1:4182/catalog.svg"
+      ],
+      "css": [
+        "http://127.0.0.1:4182/assets/catalog-kUy1tpZD.css"
+      ],
+      "lenis": ""
+    },
+    {
+      "name": "Catalog → Aether loads an independent document"
+    },
+    {
+      "name": "Direct brand reload"
+    },
+    {
+      "name": "Aether owns its CSS, local fonts, metadata and providers"
+    },
+    {
+      "name": "Forward / reverse scroll and current chapter"
+    },
+    {
+      "name": "Section hash direct load"
+    },
+    {
+      "name": "Case study Enter / focus trap / scroll persistence / Escape / focus return"
+    },
+    {
+      "name": "Sound is opt-in; focus chime runs in a user-activated graph; mute closes graph"
+    },
+    {
+      "name": "Live material changes; sliders; save / restore / export / validated import / reset / quality"
+    },
+    {
+      "name": "Automatic quality changes across compact / desktop breakpoints"
+    },
+    {
+      "name": "Return to collection and browser Back"
+    },
+    {
+      "name": "Manual static reading exposes complete project stories and on-demand material study"
+    },
+    {
+      "name": "WebGL context loss fallback and retry"
+    },
+    {
+      "name": "Scene-chunk network failure preserves content; explicit reload recovers"
+    },
+    {
+      "name": "No GPU preserves headline, CTA, static images and all semantic content"
+    },
+    {
+      "name": "360 / 390 / 768 / 1440 portrait, landscape and OS reduced-motion emulation"
+    },
+    {
+      "name": "Existing Luma entry and reload remain isolated",
+      "css": [
+        "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap",
+        "http://127.0.0.1:4182/assets/luma-C3bByhdW.css"
+      ],
+      "resources": [
+        "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap",
+        "http://127.0.0.1:4182/assets/luma-5DXeRXN9.js",
+        "http://127.0.0.1:4182/assets/luma-C3bByhdW.css",
+        "http://127.0.0.1:4182/assets/client-DUzeO-QE.js",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoYZ7AjSh8.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoYZ7AjSh8.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXoYZ7Aj.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HTEJm86Rb0JcBaoUUU.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HTEJm87Rb0JcBaoUUU.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HTEJm81Rb0JcBao.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0JcBaoUUU.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW87Rb0JcBaoUUU.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0JcBao.woff2",
+        "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0JcBao.woff2",
+        "http://127.0.0.1:4182/landings/luma/images/alpine-lake.jpg",
+        "http://127.0.0.1:4182/landings/luma/images/luma-camera.png",
+        "http://127.0.0.1:4182/landings/luma/images/forest-light.jpg",
+        "http://127.0.0.1:4182/landings/luma/luma.svg"
+      ]
+    },
+    {
+      "name": "No console errors, page errors, WebGL errors or failed requests in ordinary flow"
+    }
+  ],
+  "errors": [],
+  "requests": {
+    "resources": [
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/fonts/cormorant-latin.woff2",
+        "transfer": 300,
+        "decoded": 0
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/fonts/manrope-latin.woff2",
+        "transfer": 300,
+        "decoded": 0
+      },
+      {
+        "name": "http://127.0.0.1:4182/assets/aether-story-ybHuoBMq.css",
+        "transfer": 300,
+        "decoded": 24851
+      },
+      {
+        "name": "http://127.0.0.1:4182/assets/aether-story-CWDtts6b.js",
+        "transfer": 300,
+        "decoded": 145763
+      },
+      {
+        "name": "http://127.0.0.1:4182/assets/client-DUzeO-QE.js",
+        "transfer": 300,
+        "decoded": 187365
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/sonora-crystal.svg",
+        "transfer": 300,
+        "decoded": 0
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/vela-crystal.svg",
+        "transfer": 300,
+        "decoded": 0
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/verdant-crystal.svg",
+        "transfer": 300,
+        "decoded": 0
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/mark.svg",
+        "transfer": 300,
+        "decoded": 291
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/poster.webp",
+        "transfer": 300,
+        "decoded": 39056
+      },
+      {
+        "name": "http://127.0.0.1:4182/assets/scene-C76mbSaD.js",
+        "transfer": 300,
+        "decoded": 551667
+      },
+      {
+        "name": "http://127.0.0.1:4182/landings/aether-story/mark.svg",
+        "transfer": 300,
+        "decoded": 291
+      }
+    ],
+    "css": [
+      "http://127.0.0.1:4182/assets/aether-story-ybHuoBMq.css"
+    ],
+    "metadata": {
+      "lang": "en",
+      "title": "Aether Studio — An idea takes flight"
+    },
+    "quality": {
+      "engine": "three.js r186",
+      "quality": "high",
+      "geometryBytes": "2389628",
+      "environmentBytes": "1572864",
+      "fieldBytes": "1048576",
+      "triangles": "33552"
+    },
+    "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)"
+  },
+  "responsive": [
+    {
+      "width": 360,
+      "height": 800,
+      "reduced": false,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "reduced": false,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "false",
+          "quality": "low"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "reduced": false,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "reduced": false,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        }
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "reduced": false,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "false",
+          "quality": "high"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "views": [
+        {
+          "id": "spark",
+          "overflow": false,
+          "static": "true",
+          "quality": "low"
+        },
+        {
+          "id": "formation",
+          "overflow": false,
+          "static": "true",
+          "quality": "low"
+        },
+        {
+          "id": "resonance",
+          "overflow": false,
+          "static": "true",
+          "quality": "low"
+        },
+        {
+          "id": "rebirth",
+          "overflow": false,
+          "static": "true",
+          "quality": "low"
+        },
+        {
+          "id": "reimagine",
+          "overflow": false,
+          "static": "true",
+          "quality": "low"
+        }
+      ]
+    }
+  ]
+}

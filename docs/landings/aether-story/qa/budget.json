@@ -1,0 +1,108 @@
+{
+  "method": "Conservative raw file total: Aether HTML, all static and dynamic JS/CSS manifest dependencies, and EVERY file in the Aether public namespace, including unused previews, licenses and fallback assets. No gzip or cache discount. Generated GPU scene resources are counted separately; framebuffer allocations are excluded from geometry/texture counts.",
+  "totalBytes": 1048955,
+  "totalMiB": 1.000361442565918,
+  "firstExperienceLimitMiB": 18,
+  "resources": [
+    {
+      "tier": "high",
+      "geometryBytes": 2389628,
+      "environmentBytes": 1572864,
+      "fieldBytes": 1048576,
+      "totalBytes": 5011068,
+      "totalMiB": 4.778926849365234,
+      "limitMiB": 8
+    },
+    {
+      "tier": "low",
+      "geometryBytes": 2387708,
+      "environmentBytes": 688128,
+      "fieldBytes": 1048576,
+      "totalBytes": 4124412,
+      "totalMiB": 3.9333457946777344,
+      "limitMiB": 8
+    }
+  ],
+  "files": [
+    {
+      "file": "dist/aether-story/index.html",
+      "bytes": 2193
+    },
+    {
+      "file": "dist/assets/aether-story-BuUPlkvd.js",
+      "bytes": 145847
+    },
+    {
+      "file": "dist/assets/aether-story-3MZVyC4r.css",
+      "bytes": 24893
+    },
+    {
+      "file": "dist/assets/client-DUzeO-QE.js",
+      "bytes": 187365
+    },
+    {
+      "file": "dist/assets/scene-X1v13CF-.js",
+      "bytes": 551667
+    },
+    {
+      "file": "public/landings/aether-story/THIRD_PARTY_NOTICES.txt",
+      "bytes": 1403
+    },
+    {
+      "file": "public/landings/aether-story/mark.svg",
+      "bytes": 291
+    },
+    {
+      "file": "public/landings/aether-story/poster.svg",
+      "bytes": 4449
+    },
+    {
+      "file": "public/landings/aether-story/poster.webp",
+      "bytes": 39056
+    },
+    {
+      "file": "public/landings/aether-story/preview.webp",
+      "bytes": 23314
+    },
+    {
+      "file": "public/landings/aether-story/sonora-crystal.svg",
+      "bytes": 523
+    },
+    {
+      "file": "public/landings/aether-story/sonora.svg",
+      "bytes": 3773
+    },
+    {
+      "file": "public/landings/aether-story/vela-crystal.svg",
+      "bytes": 523
+    },
+    {
+      "file": "public/landings/aether-story/vela.svg",
+      "bytes": 4662
+    },
+    {
+      "file": "public/landings/aether-story/verdant-crystal.svg",
+      "bytes": 523
+    },
+    {
+      "file": "public/landings/aether-story/verdant.svg",
+      "bytes": 2227
+    },
+    {
+      "file": "public/landings/aether-story/fonts/OFL-cormorant.txt",
+      "bytes": 4387
+    },
+    {
+      "file": "public/landings/aether-story/fonts/OFL-manrope.txt",
+      "bytes": 4387
+    },
+    {
+      "file": "public/landings/aether-story/fonts/cormorant-latin.woff2",
+      "bytes": 22896
+    },
+    {
+      "file": "public/landings/aether-story/fonts/manrope-latin.woff2",
+      "bytes": 24576
+    }
+  ]
+}

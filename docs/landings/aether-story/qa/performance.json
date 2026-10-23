@@ -1,0 +1,71 @@
+{
+  "base": "http://127.0.0.1:4183/landingpage-parallax/",
+  "browser": "155.0.8059.85",
+  "date": "2026-10-23T15:46:48.301Z",
+  "results": [
+    {
+      "name": "desktop-high",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "dpr": 2,
+      "quality": "high",
+      "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "devicePixelRatio": 2,
+      "backing": [
+        2160,
+        1350
+      ],
+      "canvas": {
+        "engine": "three.js r186",
+        "quality": "high",
+        "geometryBytes": "2389628",
+        "environmentBytes": "1572864",
+        "fieldBytes": "1048576",
+        "triangles": "33552"
+      },
+      "visibility": "visible",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "durationMs": 30015.5,
+      "frames": 1801,
+      "averageFps": 60.002332128400326,
+      "p95FrameIntervalMs": 16.700000000000728,
+      "maxIntervalMs": 16.80000000000291,
+      "method": "requestAnimationFrame intervals, 30 s after warm-up; programmed native scroll through four chapters forward and reverse; reading holds in each segment",
+      "realMobileDevice": false
+    },
+    {
+      "name": "desktop-mobile-emulation-low",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 3,
+      "quality": "low",
+      "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "devicePixelRatio": 3,
+      "backing": [
+        390,
+        844
+      ],
+      "canvas": {
+        "engine": "three.js r186",
+        "quality": "low",
+        "geometryBytes": "2387708",
+        "environmentBytes": "688128",
+        "fieldBytes": "1048576",
+        "triangles": "33552"
+      },
+      "visibility": "visible",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "durationMs": 30015.5,
+      "frames": 1801,
+      "averageFps": 60.002332128400326,
+      "p95FrameIntervalMs": 16.700000000000728,
+      "maxIntervalMs": 16.80000000000291,
+      "method": "requestAnimationFrame intervals, 30 s after warm-up; programmed native scroll through four chapters forward and reverse; reading holds in each segment",
+      "realMobileDevice": false
+    }
+  ]
+}

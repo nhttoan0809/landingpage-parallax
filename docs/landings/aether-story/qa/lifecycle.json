@@ -1,0 +1,21 @@
+{
+  "base": "http://127.0.0.1:4183/landingpage-parallax/",
+  "method": "Real Chrome/WebGL and Web Audio. Instrumented scene-requested RAF only. Synthetic document.hidden visibilitychange verifies handlers; this is not a physical OS tab switch.",
+  "before": {
+    "frames": 25,
+    "audio": "running"
+  },
+  "hidden": {
+    "frames": 25,
+    "audio": "suspended"
+  },
+  "resumed": {
+    "frames": 40,
+    "audio": "running"
+  },
+  "staticFrames": {
+    "start": 44,
+    "end": 44
+  },
+  "pass": true
+}
