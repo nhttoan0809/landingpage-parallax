@@ -1,7 +1,7 @@
 {
   "method": "Conservative raw file total: Aether HTML, all static and dynamic JS/CSS manifest dependencies, and EVERY file in the Aether public namespace, including unused previews, licenses and fallback assets. No gzip or cache discount. Generated GPU scene resources are counted separately; framebuffer allocations are excluded from geometry/texture counts.",
-  "totalBytes": 1048955,
-  "totalMiB": 1.000361442565918,
+  "totalBytes": 1063787,
+  "totalMiB": 1.0145063400268555,
   "firstExperienceLimitMiB": 18,
   "resources": [
     {
@@ -26,11 +26,11 @@
   "files": [
     {
       "file": "dist/aether-story/index.html",
-      "bytes": 2193
+      "bytes": 2299
     },
     {
-      "file": "dist/assets/aether-story-BuUPlkvd.js",
-      "bytes": 145847
+      "file": "dist/assets/aether-story-BHr-XggH.js",
+      "bytes": 28867
     },
     {
       "file": "dist/assets/aether-story-3MZVyC4r.css",
@@ -41,8 +41,16 @@
       "bytes": 187365
     },
     {
-      "file": "dist/assets/scene-X1v13CF-.js",
-      "bytes": 551667
+      "file": "dist/assets/preload-helper-BudHKwIL.js",
+      "bytes": 117053
+    },
+    {
+      "file": "dist/assets/scene-DJIY0SF4.js",
+      "bytes": 17835
+    },
+    {
+      "file": "dist/assets/three.module-CbiTn_cx.js",
+      "bytes": 548487
     },
     {
       "file": "public/landings/aether-story/THIRD_PARTY_NOTICES.txt",
@@ -90,11 +98,11 @@
     },
     {
       "file": "public/landings/aether-story/fonts/OFL-cormorant.txt",
-      "bytes": 4387
+      "bytes": 4386
     },
     {
       "file": "public/landings/aether-story/fonts/OFL-manrope.txt",
-      "bytes": 4387
+      "bytes": 4386
     },
     {
       "file": "public/landings/aether-story/fonts/cormorant-latin.woff2",

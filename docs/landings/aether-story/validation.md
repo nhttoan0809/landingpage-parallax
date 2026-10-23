@@ -11,6 +11,18 @@ Validated on 2026-10-23. This is an original fictional studio concept and a loca
 - All Aether code, fonts, generated art, dependency installation, test runs, builds and preview servers belong to this worktree. The pre-existing `apex-velocity` worktree was left alone.
 - The Aether worktree and branch are retained. The final `dist/` uses the GitHub Pages base. Both local Aether servers were stopped at the user's request before integration; commit and merge history is recorded in Git.
 
+## Integration validation
+
+`main` received Apex Velocity in `621c9ea` while Aether was being handed off. Integration preserves both landings, combines their catalog entries and retains Apex's additional accessibility dependency. The only content conflict was the data-only registry. All integration checks ran inside the Aether worktree.
+
+- `bun install --frozen-lockfile`, `bun run lint`, and `bun run test --run`: passed; **34 tests in 6 files**, including the 6 Apex tests.
+- Ordinary and GitHub Pages builds: passed; catalog, Aether, Apex and Luma each retain an independent stylesheet.
+- Real Chrome smoke checks at both bases: all three catalog links load fresh documents, direct reloads work, each document owns its brand CSS, Aether's WebGL preview becomes ready, and there are no page, console or HTTP errors. Luma retains its existing Google Fonts stylesheet.
+- The conservative budget was recalculated against the combined production manifest: **1.015 MiB**. Shared JavaScript dependencies do not share brand CSS.
+- Temporary integration previews were stopped after verification. Ports 5182, 4183 and 4393 are no longer serving Aether.
+
+The detailed acceptance and performance records below describe the original isolated Aether validation before the Apex integration.
+
 ## Required commands
 
 | Command                                                                                                        | Final exit status / result                                                            |
@@ -31,7 +43,7 @@ Validated on 2026-10-23. This is an original fictional studio concept and a loca
 
 The unit tests cover real production `progressAt` / `sampleStory` mapping, unequal chapter heights, clamps and reverse traversal; versioned preset round trips and malformed data; Enter / Escape / focus trapping / focus return; complete static content; local preset save / restore / reset and corrupt storage. They do **not** establish shader appearance or WebGL performance. Browser checks use actual Chrome/WebGL, not jsdom.
 
-Build output retains the existing Browserslist / baseline-data age notices and a Vite warning for the lazy Three.js scene chunk (~552 kB raw, ~140 kB gzip). It remains dynamically loaded and inside the measured budget; no warning limit, CSS guard or code-splitting requirement was disabled. The existing Luma unit test prints its normal reduced-motion informational message.
+Build output retains the existing Browserslist / baseline-data age notices and a Vite warning for Three.js (~552 kB raw in the isolated scene chunk; ~548 kB in the combined build's shared Three.js chunk). It remains dynamically loaded and inside the measured budget; no warning limit, CSS guard or code-splitting requirement was disabled. The existing Luma unit test prints its normal reduced-motion informational message.
 
 ## Browser matrix
 
@@ -75,7 +87,7 @@ Method: 1-second warm-up after scene / quality setup, then 30 seconds of `reques
 
 The measured desktop workload meets the requested ≥45 FPS / p95 ≤40 ms targets. **Real mobile ≥30 FPS remains unverified**: no physical phone was used in this validation run. Responsive emulation is not evidence for that criterion. Safari, Firefox and real touch-device GPU / audio behaviour have not been measured.
 
-[Budget calculation](qa/budget.json) conservatively totals Aether HTML, **every** static / dynamic JS and CSS dependency in the manifest and **every** Aether public file (even unused preview, fallback and license files), without compression or cache discounts: **1.000 MiB**, below the 18 MiB first-experience budget.
+[Budget calculation](qa/budget.json) conservatively totals Aether HTML, **every** static / dynamic JS and CSS dependency in the manifest and **every** Aether public file (even unused preview, fallback and license files), without compression or cache discounts: **1.015 MiB** in the combined build, below the 18 MiB first-experience budget.
 
 Scene geometry / texture data: **4.779 MiB high**, **3.933 MiB low**, below 8 MiB. This counts unique geometry attribute / index arrays, the baked environment target and generated light-field texture. It excludes renderer framebuffer allocations and shader programs; these figures are not total GPU memory. The initial sculpture is ~33,552 triangles. No model or texture is fetched from a remote host. Both tiers retain the same silhouette.
 

@@ -1,0 +1,59 @@
+{
+  "base": "http://127.0.0.1:4181/",
+  "checks": [
+    "catalog isolated; static preview only",
+    "catalog → Apex with live 3D",
+    "viewer buttons/reset and pointer drag",
+    "three editions update live studio; real JSON download",
+    "direct hash URL/reload",
+    "return to catalog and browser Back",
+    "GPU context loss, local poster and static/restart controls",
+    "desktop automated accessibility",
+    "360 / 390 / 768 / 1440 overflow and mobile menu focus containment",
+    "reduced motion: natural flow and manual viewer",
+    "Luma gallery, edition dialog and brand isolation",
+    "WebGL unavailable: poster, narrative and configuration remain usable",
+    "engine chunk load error keeps a poster and working collection CTA"
+  ],
+  "layouts": [
+    {
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "consoleErrors": [],
+  "catalogRequests": [
+    "http://127.0.0.1:4181/",
+    "http://127.0.0.1:4181/assets/catalog-D-0bQZAj.js",
+    "http://127.0.0.1:4181/assets/client-DUzeO-QE.js",
+    "http://127.0.0.1:4181/assets/catalog-kUy1tpZD.css",
+    "http://127.0.0.1:4181/landings/apex-velocity/preview.webp",
+    "http://127.0.0.1:4181/landings/luma/images/alpine-lake.jpg",
+    "http://127.0.0.1:4181/catalog.svg"
+  ],
+  "lumaAssets": [
+    "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap",
+    "http://127.0.0.1:4181/assets/luma-5DXeRXN9.js",
+    "http://127.0.0.1:4181/assets/luma-C3bByhdW.css",
+    "http://127.0.0.1:4181/assets/client-DUzeO-QE.js",
+    "http://127.0.0.1:4181/landings/luma/images/alpine-lake.jpg",
+    "http://127.0.0.1:4181/landings/luma/images/luma-camera.png",
+    "http://127.0.0.1:4181/landings/luma/images/forest-light.jpg",
+    "http://127.0.0.1:4181/landings/luma/luma.svg"
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+}

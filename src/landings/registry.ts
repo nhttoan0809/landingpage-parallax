@@ -22,6 +22,16 @@ export const landingPages: readonly LandingPage[] = [
     previewAlt: "Phượng hoàng kính Aether trên nền bạc tím khói",
   },
   {
+    slug: "apex-velocity",
+    name: "Apex Velocity",
+    category: "Motorsport / Bộ sưu tập mũ đua",
+    description:
+      "Thế giới đua xe hư cấu của Alex Vale. Khám phá mũ 3D, câu chuyện cinematic scroll và ba phiên bản mang dấu ấn riêng.",
+    styles: ["Motorsport", "3D / WebGL", "Cinematic scroll"],
+    preview: "landings/apex-velocity/preview.webp",
+    previewAlt: "Mũ đua cam Ignition và nhận diện Apex Velocity",
+  },
+  {
     slug: "luma",
     name: "Luma Field",
     category: "Máy ảnh du lịch",

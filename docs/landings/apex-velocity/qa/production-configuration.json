@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "brand": "Apex Velocity",
+  "rider": "Alex Vale",
+  "variant": {
+    "id": "saltline",
+    "name": "Saltline",
+    "edition": "AV–03"
+  },
+  "colors": {
+    "shell": "#e8e4d8",
+    "graphic": "#287275",
+    "visor": "#223c40"
+  },
+  "materials": {
+    "shell": "Pearlescent composite shell",
+    "finish": "Pearl enamel",
+    "visor": "Reflective smoked polycarbonate",
+    "trim": "Matte elastomer"
+  },
+  "conceptOnly": true
+}

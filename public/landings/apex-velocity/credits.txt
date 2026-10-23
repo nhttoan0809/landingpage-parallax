@@ -1,0 +1,18 @@
+APEX VELOCITY / ASSET CREDITS
+A fictional driver and helmet collection. Original design study, 2026.
+
+Helmet: original procedural Three.js geometry and canvas graphics.
+Source: src/landings/apex-velocity/helmet.ts
+Circuit and coastal illustrations, logo and favicon: original SVG artwork.
+Studio posters: rendered locally from the same original 3D model.
+No real driver images, sponsor marks or third-party helmet textures used.
+
+Barlow and Barlow Condensed: Jeremy Tribby.
+Source: https://github.com/google/fonts/tree/main/ofl/barlow
+https://github.com/google/fonts/tree/main/ofl/barlowcondensed
+License: SIL Open Font License 1.1 (fonts/OFL.txt)
+Retrieved 2026-10-23. Fonts unmodified.
+
+Interaction research: OFF+BRAND Lando Norris case study.
+https://www.itsoffbrand.com/our-work/lando-norris
+Reference only; no artwork copied.
