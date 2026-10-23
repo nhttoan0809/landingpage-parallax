@@ -19,20 +19,35 @@ Mở repository này làm workspace. Chọn **một** task và gửi một trong
 
 ```text
 Đọc docs/research/creative-web/tasks/01-apex-velocity.md và thực hiện toàn bộ task
-đến sản phẩm cuối cùng. Tuân thủ AGENTS.md hiện tại; triển khai, kiểm tra và bàn giao
-theo tiêu chí trong task. Không dừng ở kế hoạch hoặc mockup.
+đến sản phẩm cuối cùng. Trước khi triển khai, tạo Git worktree riêng tại
+../landingpage-parallax-worktrees/apex-velocity với branch feat/apex-velocity
+từ HEAD hiện tại; nếu tên đã tồn tại, chọn hậu tố duy nhất. Chuyển sang worktree
+đó và thực hiện toàn bộ tạo asset, cài dependency, sửa code, kiểm tra và preview
+trong worktree. Bảo toàn checkout nguồn và thay đổi chưa commit; không tự merge,
+push hoặc xóa worktree. Tuân thủ AGENTS.md và tiêu chí trong task. Khi bàn giao,
+ghi đường dẫn worktree, branch và lệnh chạy. Không dừng ở kế hoạch hoặc mockup.
 ```
 
 ```text
 Đọc docs/research/creative-web/tasks/02-aether-story.md và thực hiện toàn bộ task
-đến sản phẩm cuối cùng. Tuân thủ AGENTS.md hiện tại; triển khai, kiểm tra và bàn giao
-theo tiêu chí trong task. Không dừng ở kế hoạch hoặc mockup.
+đến sản phẩm cuối cùng. Trước khi triển khai, tạo Git worktree riêng tại
+../landingpage-parallax-worktrees/aether-story với branch feat/aether-story
+từ HEAD hiện tại; nếu tên đã tồn tại, chọn hậu tố duy nhất. Chuyển sang worktree
+đó và thực hiện toàn bộ tạo asset, cài dependency, sửa code, kiểm tra và preview
+trong worktree. Bảo toàn checkout nguồn và thay đổi chưa commit; không tự merge,
+push hoặc xóa worktree. Tuân thủ AGENTS.md và tiêu chí trong task. Khi bàn giao,
+ghi đường dẫn worktree, branch và lệnh chạy. Không dừng ở kế hoạch hoặc mockup.
 ```
 
 ```text
 Đọc docs/research/creative-web/tasks/03-waypoint-world.md và thực hiện toàn bộ task
-đến sản phẩm cuối cùng. Tuân thủ AGENTS.md hiện tại; triển khai, kiểm tra và bàn giao
-theo tiêu chí trong task. Không dừng ở kế hoạch hoặc mockup.
+đến sản phẩm cuối cùng. Trước khi triển khai, tạo Git worktree riêng tại
+../landingpage-parallax-worktrees/waypoint-world với branch feat/waypoint-world
+từ HEAD hiện tại; nếu tên đã tồn tại, chọn hậu tố duy nhất. Chuyển sang worktree
+đó và thực hiện toàn bộ tạo asset, cài dependency, sửa code, kiểm tra và preview
+trong worktree. Bảo toàn checkout nguồn và thay đổi chưa commit; không tự merge,
+push hoặc xóa worktree. Tuân thủ AGENTS.md và tiêu chí trong task. Khi bàn giao,
+ghi đường dẫn worktree, branch và lệnh chạy. Không dừng ở kế hoạch hoặc mockup.
 ```
 
 Cũng có thể dán toàn bộ nội dung một task vào conversation mới. Mỗi task lặp lại
@@ -49,8 +64,9 @@ là nguồn bổ sung, không phải điều kiện để hiểu task.
 - Nghiệm thu là website chạy được trong repo và bản build tĩnh, kèm bằng chứng QA.
   Publish, mua asset, tạo tài khoản dịch vụ và gửi thông tin cho người khác nằm
   ngoài phạm vi mặc định.
-- Nếu thực hiện đồng thời ở các checkout khác nhau, registry, README và lockfile
-  vẫn là điểm cần tích hợp; trước khi kết thúc phải bảo toàn các landing đã có.
+- Mỗi task bắt buộc tạo worktree và branch riêng, triển khai/kiểm tra trong
+  worktree đó và giữ lại để review. Registry, README và lockfile có thể cần
+  tích hợp khi merge sau này; task không tự merge vào checkout nguồn.
 
 ## Quy ước về độ tin cậy
 

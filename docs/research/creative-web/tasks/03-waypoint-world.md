@@ -15,6 +15,31 @@ phẳng trống, mockup hoặc kế hoạch. Chỉ hỏi khi thiếu thông tin 
 thể suy ra; tiếp tục phần độc lập trong khi chờ. Bàn giao local/build tĩnh;
 publish, backend production, mua asset và tạo tài khoản nằm ngoài phạm vi task.
 
+## Worktree riêng bắt buộc
+
+Trước khi tạo asset, cài dependency hoặc sửa implementation, tạo **Git worktree
+riêng và branch riêng** cho task này. Mọi đường dẫn tương đối trong brief sau
+đó đều tính từ worktree mới, không phải checkout nguồn.
+
+1. Trong checkout nguồn, kiểm tra `git status`, `git worktree list` và HEAD hiện
+   tại. Dùng HEAD hiện tại làm điểm xuất phát; bảo toàn thay đổi chưa commit.
+2. Tạo branch `feat/waypoint-world` và worktree ở thư mục sibling
+   `../landingpage-parallax-worktrees/waypoint-world` bằng `git worktree add -b`.
+   Nếu tên/đường dẫn đã tồn tại, chọn hậu tố duy nhất và tạo worktree mới;
+   không ghi đè, reset hoặc chiếm worktree của conversation khác.
+3. Chuyển working directory của mọi lệnh tiếp theo sang worktree mới và xác
+   minh đường dẫn/branch. Đọc lại hướng dẫn áp dụng tại đó. Nếu brief đang đọc
+   chưa nằm trong HEAD, giữ bản sao brief này để thực thi; chỉ mang theo tài
+   liệu task cần thiết, không tự copy toàn bộ thay đổi chưa commit của checkout nguồn.
+4. Thực hiện thiết kế, tạo asset, cài dependency, sửa code/docs/registry/README,
+   chạy test/build và preview **hoàn toàn trong worktree này**. Cài dependency
+   riêng; dùng cổng preview còn trống để không đụng session khác.
+5. Giữ worktree và branch để người dùng review. Không tự stash, commit thay đổi
+   có sẵn, merge về branch nguồn, push, xóa worktree hoặc sửa checkout nguồn.
+   Khi bàn giao, ghi đường dẫn tuyệt đối worktree, tên branch, base commit,
+   trạng thái thay đổi và lệnh chạy dev/preview từ worktree đó. Nếu Git không
+   thể tạo worktree, báo lỗi cụ thể; không âm thầm triển khai trong checkout nguồn.
+
 ## Nguồn, bối cảnh và phạm vi game
 
 - Repo dùng **Bun, Vite 7, React 19, TypeScript**, multi-page với catalog `/`.
