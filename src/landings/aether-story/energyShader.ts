@@ -63,3 +63,24 @@ export function makeEnergy(count: number) {
   points.renderOrder = 10;
   return { points, material };
 }
+
+/** A restrained analytic aura: no bloom framebuffer or remote texture. */
+export function makeHalo() {
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      uGlow: { value: 0.35 },
+      uColor: { value: new THREE.Color("#b6a0cf") },
+    },
+    vertexShader: `varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader: `varying vec2 vUv; uniform float uGlow; uniform vec3 uColor;
+      void main(){float r=length(vUv-.5)*2.;float haze=exp(-r*r*4.)*(1.-smoothstep(.65,1.,r));
+      float ring=exp(-pow((r-.58)*19.,2.));gl_FragColor=vec4(uColor,(haze*.22+ring*.045)*uGlow);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+      }`,
+    transparent: true,
+    depthWrite: false,
+  });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), material);
+  return { mesh, material };
+}

@@ -24,7 +24,7 @@ describe("reversible story mapping", () => {
       .map((y) => sampleStory(progressAt(y, offsets), false))
       .reverse();
     expect(backward).toEqual(forward);
-    expect(sampleStory(0.25, false).turn).toBeGreaterThan(
+    expect(sampleStory(0.25, false).turn).toBeLessThan(
       sampleStory(0, false).turn,
     );
     expect(sampleStory(0.25, false).wing).not.toBe(sampleStory(0, false).wing);

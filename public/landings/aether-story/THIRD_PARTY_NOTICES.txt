@@ -28,3 +28,9 @@ https://gsap.com/community/standard-license/
 Original library notices are retained in distribution files.
 
 Fonts: see fonts/OFL-cormorant.txt and fonts/OFL-manrope.txt.
+
+Phoenix v2 (2026-10-25): anatomical layout adapted by request from the user-supplied AI-assisted procedural HTML. The reference is documented under docs/landings/aether-story/reference/ and is not loaded by the production site. No original Noomo model or artwork was imported. Closed-volume feather geometry, instancing, motion integration and physical shader additions were authored in this repository.
+
+Phoenix appearances (2026-10-26): spectral/Fresnel shading, the wireframe stage and moving magma-vein concepts were adapted by request from the same user-supplied reference. The r186 physical-shader integration, analytic aura, UI and persistence were authored in this repository. No reference CDN application, external Noomo shader/model or bloom pipeline is distributed.
+
+Current refinement (2026-10-26): original HDR highlight extraction, separable bloom and composite in bloom.ts; normal/awakened crystal WebP assets rendered from this repository's live scene. Prismatic Glass and the separate palette controls have been removed.

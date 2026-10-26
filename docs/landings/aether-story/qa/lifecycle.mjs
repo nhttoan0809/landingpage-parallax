@@ -10,7 +10,7 @@ await page.addInitScript(()=>{
  const Context=window.AudioContext;window.__contexts=[];window.AudioContext=class extends Context{constructor(...args){super(...args);window.__contexts.push(this)}};
 });
 try {
- await page.goto(base+'aether-story/');await page.waitForSelector('[data-ready="true"]');await page.getByRole('button',{name:'Sound off',exact:true}).click();
+ await page.goto(base+'aether-story/');await page.waitForSelector('[data-ready="true"] canvas[data-quality]');await page.getByRole('button',{name:'Sound off',exact:true}).click();
  await page.waitForTimeout(250);const before=await page.evaluate(()=>({frames:window.__sceneFrames,audio:window.__contexts[0].state}));assert(before.frames>0);assert.equal(before.audio,'running');
  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'))});
  await page.waitForTimeout(150);const hiddenStart=await page.evaluate(()=>window.__sceneFrames);await page.waitForTimeout(350);

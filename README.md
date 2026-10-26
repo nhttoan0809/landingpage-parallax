@@ -29,7 +29,7 @@ _Hình sản phẩm ý tưởng Luma Field, được tạo bằng AI; đây là 
 | --- | --- | --- | --- |
 | Luma Field | `/luma/` | Máy ảnh, thiên nhiên, parallax | [Design](docs/landings/luma/design.md) |
 | Apex Velocity | `/apex-velocity/` | Mũ đua 3D, cinematic scroll và cấu hình phiên bản | [Design](docs/landings/apex-velocity/design.md) · [Validation](docs/landings/apex-velocity/validation.md) |
-| Aether Studio | `/aether-story/` | Phượng hoàng kính WebGL, bốn chương, case study và customizer | [Design](docs/landings/aether-story/design.md) · [Validation](docs/landings/aether-story/validation.md) |
+| Aether Studio | `/aether-story/` | Phượng hoàng WebGL phát sáng, bốn chương, case study và customizer | [Design](docs/landings/aether-story/design.md) · [Validation](docs/landings/aether-story/validation-v2.md) |
 
 ## 🌟 Trải Nghiệm Trực Tuyến (Live Website)
 

@@ -1,5 +1,5 @@
 /** Real Chrome/WebGL acceptance checks. Run with AETHER_QA_URL pointing to a production preview. */
-import { chromium } from '@playwright/test';
+import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { writeFile, mkdir } from 'node:fs/promises';
 const base = process.env.AETHER_QA_URL || 'http://127.0.0.1:4182/';
@@ -8,12 +8,13 @@ const out = 'docs/landings/aether-story/qa';
 await mkdir(out,{recursive:true});
 const browser = await chromium.launch({ channel:'chrome',headless:true,args:['--enable-webgl','--ignore-gpu-blocklist'] });
 const report={base,date:new Date().toISOString(),browser:browser.version(),checks:[],errors:[],requests:[],responsive:[]};
-const pass=(name,details={})=>{report.checks.push({name,...details});console.log('PASS',name)};
+let phase='initial catalog load';
+const pass=(name,details={})=>{phase='after '+name;report.checks.push({name,...details});console.log('PASS',name)};
 const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
 page.on('pageerror',e=>report.errors.push(e.message));
-page.on('console',m=>{if(m.type()==='error'||m.text().includes('GL_INVALID'))report.errors.push(m.text())});
+page.on('console',m=>{if(m.type()==='error'||m.text().includes('GL_INVALID'))report.errors.push(`${phase}: ${m.text()} (${m.location().url}:${m.location().lineNumber})`)});
 page.on('response',r=>{if(r.status()>=400)report.errors.push(`${r.status()} ${r.url()}`)});
-const ready=async p=>p.waitForSelector('[data-ready="true"]',{timeout:20000});
+const ready=async p=>p.waitForSelector('[data-ready="true"] canvas[data-quality]',{timeout:20000});
 const chapter=async(id,delta=0)=>{await page.evaluate(({id,delta})=>window.scrollTo(0,document.getElementById(id).offsetTop+delta),{id,delta});await page.waitForTimeout(650)};
 try {
  await page.goto(base); await page.waitForLoadState('networkidle');
@@ -45,14 +46,15 @@ try {
  await page.getByRole('button',{name:'Explore Vela Observatory case study'}).focus();
  await page.getByRole('button',{name:'Sound on',exact:true}).click();assert.equal(await page.evaluate(()=>window.__aetherAudio[0].state),'closed');pass('Sound is opt-in; focus chime runs in a user-activated graph; mute closes graph');
  await chapter('reimagine');
- const opal=await page.locator('canvas').screenshot();await page.getByRole('radio',{name:'Tide',exact:true}).check();await page.waitForTimeout(120);const tide=await page.locator('canvas').screenshot();assert(!opal.equals(tide));
+ const opal=await page.locator('canvas').screenshot();await page.getByRole('radio',{name:'Solar Magma GLSL',exact:true}).check();await page.waitForTimeout(120);const tide=await page.locator('canvas').screenshot();assert(!opal.equals(tide));
+ await page.getByRole('radio',{name:'Iridescent GLSL',exact:true}).check();
  for(const name of ['Dispersion','Inner glow']) {const slider=page.getByRole('slider',{name,exact:true});await slider.fill(name==='Dispersion'?'0.9':'0.85');}
- await page.getByRole('button',{name:'Save preset',exact:false}).click();await page.getByRole('radio',{name:'Ember',exact:true}).check();await page.getByRole('button',{name:'Restore saved',exact:true}).click();assert(await page.getByRole('radio',{name:'Tide',exact:true}).isChecked());
+ await page.getByRole('button',{name:'Save preset',exact:false}).click();await page.getByRole('radio',{name:'Holo Wireframe',exact:true}).check();await page.getByRole('button',{name:'Restore saved',exact:true}).click();assert(await page.getByRole('radio',{name:'Iridescent GLSL',exact:true}).isChecked());
  const download=page.waitForEvent('download');await page.getByRole('button',{name:'Export JSON',exact:true}).click();const downloaded=await download;await downloaded.saveAs(`${out}/${tag}-export.json`);
  const upload=page.getByLabel('Import preset JSON');
- await upload.setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"bad","version":3}')});await page.getByRole('alert').waitFor();assert(await page.getByRole('radio',{name:'Tide',exact:true}).isChecked());
- await upload.setInputFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"aether.phoenix","version":1,"palette":"ember","dispersion":0.2,"glow":0.7}')});assert(await page.getByRole('radio',{name:'Ember',exact:true}).isChecked());
- await page.getByRole('button',{name:'Reset',exact:true}).click();assert(await page.getByRole('radio',{name:'Opal',exact:true}).isChecked());
+ await upload.setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"bad","version":3}')});await page.getByRole('alert').waitFor();assert(await page.getByRole('radio',{name:'Iridescent GLSL',exact:true}).isChecked());
+ await upload.setInputFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from('{"schema":"aether.phoenix","version":1,"palette":"ember","dispersion":0.2,"glow":0.7}')});await expect(page.getByRole('radio',{name:'Iridescent GLSL',exact:true})).toBeChecked();
+ await page.getByRole('button',{name:'Reset',exact:true}).click();assert(await page.getByRole('radio',{name:'Iridescent GLSL',exact:true}).isChecked());
  await page.getByLabel('Render quality').selectOption('low');await page.waitForSelector('canvas[data-quality="low"]');assert.equal(await page.locator('canvas').getAttribute('data-quality'),'low');
  await page.getByLabel('Render quality').selectOption('high');await page.waitForSelector('canvas[data-quality="high"]');pass('Live material changes; sliders; save / restore / export / validated import / reset / quality');
  await page.getByLabel('Render quality').selectOption('auto');
@@ -62,7 +64,7 @@ try {
  await chapter('reimagine');await page.screenshot({path:`${out}/${tag}-customizer.png`});
  await page.getByRole('link',{name:/Return to collection/}).click();await page.waitForURL(base);await page.goBack();await ready(page);pass('Return to collection and browser Back');
  await page.getByRole('button',{name:'Read without motion',exact:true}).first().click();assert.equal(await page.locator('[data-static]').getAttribute('data-static'),'true');assert.equal(await page.getByText('Imagined outcome',{exact:true}).count(),3);await ready(page);
- await page.getByRole('radio',{name:'Tide',exact:true}).check();await page.screenshot({path:`${out}/${tag}-static.png`});pass('Manual static reading exposes complete project stories and on-demand material study');
+ await page.getByRole('radio',{name:'Holo Wireframe',exact:true}).check();await page.screenshot({path:`${out}/${tag}-static.png`});pass('Manual static reading exposes complete project stories and on-demand material study');
  // Context loss must release its canvas; a retry has to create a fresh, working context.
  await page.getByRole('button',{name:'Explore with motion',exact:true}).first().click();await ready(page);
  await page.evaluate(()=>document.querySelector('canvas').getContext('webgl2').getExtension('WEBGL_lose_context').loseContext());await page.getByRole('button',{name:'Retry 3D view'}).waitFor();assert.equal(await page.locator('[data-ready]').getAttribute('data-ready'),'false');

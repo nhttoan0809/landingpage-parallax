@@ -1,0 +1,11 @@
+{
+  "schema": "aether.phoenix",
+  "version": 4,
+  "appearance": "holo",
+  "dispersion": 0.22,
+  "glow": 0.7,
+  "iridescence": 0.91,
+  "flapEnabled": true,
+  "flapSpeed": 1.65,
+  "wingSpread": 0.38
+}

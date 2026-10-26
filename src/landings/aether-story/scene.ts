@@ -1,8 +1,11 @@
 import * as THREE from "three";
+import { makeBloom } from "./bloom";
 import { makePhoenix } from "./phoenix";
-import { makeEnergy } from "./energyShader";
-import { installGlassContour } from "./glassShader";
-import { palettes, type Preset } from "./preset";
+import { makeSurfaceUniforms } from "./phoenix/surface";
+import { makeEnergy, makeHalo } from "./energyShader";
+import { installGlassContour, makeAppearanceUniforms } from "./glassShader";
+import type { Preset } from "./preset";
+import { portraitFrame } from "./framing";
 import { sampleStory, clamp } from "./story";
 
 export type Quality = "auto" | "high" | "low";
@@ -54,6 +57,8 @@ export function createScene(options: SceneOptions): SceneHandle {
     renderer.transmissionResolutionScale = low ? 0.45 : 0.75;
     const scene = new THREE.Scene();
     rollback.push(() => disposeObjects(scene));
+    const bloom = makeBloom(renderer, low);
+    rollback.push(() => bloom.dispose());
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 80);
     // A small original studio environment: dark room and five luminous photographic softboxes.
     const envScene = new THREE.Scene();
@@ -93,27 +98,47 @@ export function createScene(options: SceneOptions): SceneHandle {
         new THREE.MeshPhysicalMaterial({
           color: "#f4edff",
           metalness: 0,
-          roughness: 0.025 + i * 0.012,
+          roughness: 0.065 + i * 0.018,
           transmission: 1,
-          thickness: 0.65 + i * 0.14,
+          thickness: i === 0 ? 0.3 : 0.065,
           ior: 1.48,
           dispersion: 0.45,
           iridescence: 0.25,
           iridescenceIOR: 1.32,
           iridescenceThicknessRange: [150, 420],
-          envMapIntensity: 2.3,
+          envMapIntensity: 1.25,
           attenuationColor: "#b6a4cc",
-          attenuationDistance: 3.0,
-          clearcoat: 0.7,
+          attenuationDistance: 0.85,
+          clearcoat: 0.35,
           clearcoatRoughness: 0.1,
           side: THREE.FrontSide,
         }),
     );
-    const contourUpdates = materials.map(installGlassContour);
-    const { bird, wings } = makePhoenix(materials);
+    materials.push(materials[1].clone(), materials[2].clone());
+    const covertMaterial = materials[1].clone();
+    covertMaterial.transmission = 0.55;
+    covertMaterial.roughness = 0.22;
+    covertMaterial.envMapIntensity = 0.8;
+    covertMaterial.clearcoat = 0.2;
+    materials.push(covertMaterial);
+    const surface = makeSurfaceUniforms();
+    const appearance = makeAppearanceUniforms();
+    const contourUpdates = materials.map((material, i) =>
+      installGlassContour(
+        material,
+        appearance,
+        i === 0
+          ? undefined
+          : { kind: i === 3 || i === 4 ? "tail" : "blade", uniforms: surface },
+      ),
+    );
+    const phoenix = makePhoenix(materials, low);
+    const { bird } = phoenix;
     scene.add(bird);
     const energy = makeEnergy(low ? 60 : 180);
     scene.add(energy.points);
+    const halo = makeHalo();
+    scene.add(halo.mesh);
     scene.add(new THREE.HemisphereLight("#f5efff", "#72708d", 0.5));
     const key = new THREE.DirectionalLight("#ffffff", 1.5);
     key.position.set(-3, 5, 6);
@@ -163,19 +188,34 @@ export function createScene(options: SceneOptions): SceneHandle {
     const crystalMaterials = ["#c8b7ec", "#a6d8e8", "#c7d9b5"].map(
       (c) =>
         new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color(c).lerp(new THREE.Color("#ffffff"), 0.6),
+          color: new THREE.Color(c).lerp(new THREE.Color("#ffffff"), 0.25),
           attenuationColor: c,
           attenuationDistance: 2,
-          roughness: 0.04,
-          transmission: 1,
+          roughness: 0.1,
+          transmission: 0.65,
           thickness: 1.5,
           ior: 1.5,
           dispersion: 0.7,
           metalness: 0,
-          envMapIntensity: 3,
+          envMapIntensity: 4,
           clearcoat: 0.8,
         }),
     );
+    const awakened = crystalMaterials.map((_, i) => {
+      const group = new THREE.Group();
+      const material = new THREE.MeshBasicMaterial({
+        color: ["#ead5ff", "#9aeeff", "#cef5a4"][i],
+      });
+      const orbit = new THREE.Mesh(
+        new THREE.TorusGeometry(0.9, 0.012, 6, 64),
+        material,
+      );
+      orbit.rotation.set(1.05, 0.25, 0.15);
+      const heart = new THREE.Mesh(new THREE.OctahedronGeometry(0.2), material);
+      group.add(orbit, heart);
+      crystalScene.add(group);
+      return group;
+    });
     const crystalVertices: number[] = [],
       crystalIndices: number[] = [];
     const rings = [
@@ -215,6 +255,11 @@ export function createScene(options: SceneOptions): SceneHandle {
     const resonanceSection = preview
       ? null
       : document.getElementById("resonance");
+    const finalSlot = document.querySelector<HTMLElement>("[data-final-slot]");
+    const rebirthSlot = document.querySelector<HTMLElement>(
+      "[data-rebirth-slot]",
+    );
+    const footer = document.querySelector("footer");
     const formationSlot = document.querySelector<HTMLElement>(
       "[data-formation-slot]",
     );
@@ -235,7 +280,9 @@ export function createScene(options: SceneOptions): SceneHandle {
       dead = false,
       lost = false,
       time = 0,
-      lastTime = 0;
+      lastTime = 0,
+      flightTime = 0,
+      initialTriangles = 0;
     let preset = options.preset;
     let drawing = false;
     function render(now = performance.now()) {
@@ -243,22 +290,39 @@ export function createScene(options: SceneOptions): SceneHandle {
         return;
       drawing = true;
       try {
+        const delta = Math.min((now - (lastTime || now)) / 1000, 0.05);
         if (!isStatic) {
-          time += Math.min((now - (lastTime || now)) / 1000, 0.05);
+          time += delta;
+          if (preset.flapEnabled) flightTime += delta * preset.flapSpeed;
         }
         lastTime = now;
         const pose = sampleStory(preview ? 1 : journey.progress, compact);
         if (preview) {
           pose.x = 0;
           pose.y = 0.35;
-          pose.scale = compact ? 0.53 : 0.73;
+          const viewWidth =
+            2 *
+            (compact ? 12 : 11) *
+            Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) *
+            camera.aspect;
+          pose.scale = Math.min(0.58, (viewWidth * 0.86) / 11.8);
           pose.z = compact ? 12 : 11;
           pose.night = 0;
           pose.bird = 1;
+          pose.roll = 0;
+        }
+        if (compact && !preview) {
+          // Fit the entire articulated wing envelope, including its up/down stroke.
+          const viewWidth =
+            2 *
+            (pose.z - 1) *
+            Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) *
+            camera.aspect;
+          pose.scale = Math.min(pose.scale, (viewWidth * 0.9) / 10.5);
         }
         if (!compact && !preview && camera.aspect < 1.3) {
           pose.scale *= 0.49;
-          pose.x = 1.3;
+          pose.x *= 0.45;
         }
         if (compact && !preview && formationSlot) {
           const weight =
@@ -274,25 +338,95 @@ export function createScene(options: SceneOptions): SceneHandle {
             pose.y = THREE.MathUtils.lerp(pose.y, y, weight);
           }
         }
+        if (compact && !preview && rebirthSlot) {
+          const weight =
+            THREE.MathUtils.smoothstep(journey.progress, 0.68, 0.75) *
+            (1 - THREE.MathUtils.smoothstep(journey.progress, 0.91, 1));
+          if (weight > 0) {
+            const rect = rebirthSlot.getBoundingClientRect();
+            const worldHeight =
+              2 * pose.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+            pose.y = THREE.MathUtils.lerp(
+              pose.y,
+              ((height / 2 - rect.top - rect.height / 2) / height) *
+                worldHeight,
+              weight,
+            );
+          }
+        }
+        if (!preview && finalSlot) {
+          const weight = THREE.MathUtils.smoothstep(journey.progress, 0.9, 1);
+          if (weight > 0) {
+            const rect = finalSlot.getBoundingClientRect();
+            const frame = portraitFrame(
+              rect,
+              width,
+              height,
+              footer?.getBoundingClientRect().top ?? height,
+              compact,
+            );
+            const worldHeight =
+              2 * pose.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+            const scale =
+              Math.min(
+                ((frame.width / width) * worldHeight * camera.aspect) / 11.8,
+                ((frame.height / height) * worldHeight) / 7.8,
+              ) * 1.08;
+            pose.scale = THREE.MathUtils.lerp(pose.scale, scale, weight);
+            pose.x = THREE.MathUtils.lerp(
+              pose.x,
+              ((frame.left + frame.width / 2) / width - 0.5) *
+                worldHeight *
+                camera.aspect,
+              weight,
+            );
+            pose.y = THREE.MathUtils.lerp(
+              pose.y,
+              (0.5 - (frame.top + frame.height / 2) / height) * worldHeight +
+                scale * 0.8,
+              weight,
+            );
+            pose.roll *= 1 - weight;
+            if (weight === 1 && !frame.visible) pose.bird = 0;
+          }
+        }
         camera.position.set(
           (compact ? 0.12 : 0.4) * Math.sin(pose.turn),
           compact ? 0 : 0.12 * pose.turn,
           pose.z,
         );
         camera.lookAt(0, 0, 0);
-        px += (pointer.x - px) * 0.05;
-        py += (pointer.y - py) * 0.05;
+        const pointerBlend = 1 - Math.exp(-4 * delta);
+        px += (pointer.x - px) * pointerBlend;
+        py += (pointer.y - py) * pointerBlend;
         bird.position.set(pose.x, pose.y, 0);
         bird.scale.setScalar(pose.scale);
         bird.rotation.y = pose.turn + (isStatic ? 0 : px * 0.045);
-        bird.rotation.x = -0.06 + (isStatic ? 0 : py * 0.025);
+        bird.rotation.z = pose.roll;
+        bird.rotation.x = pose.pitch + (isStatic ? 0 : py * 0.025);
         bird.visible = pose.bird > 0.02;
         // Scale into a fine spark before leaving, then fully reassemble for the final reveal.
         bird.scale.multiplyScalar(0.25 + 0.75 * pose.bird);
-        wings[0].rotation.y = pose.wing;
-        wings[1].rotation.y = -pose.wing;
-        wings[0].rotation.z = -pose.wing * 0.4;
-        wings[1].rotation.z = pose.wing * 0.4;
+        phoenix.update(
+          {
+            ...pose,
+            wing: pose.wing + (0.75 - preset.wingSpread) * 0.9,
+            flap: preset.flapEnabled ? pose.flap : 0,
+          },
+          flightTime,
+          isStatic,
+          { x: px, y: py },
+        );
+        appearance.uAetherTime.value = time;
+        surface.uPhoenixTime.value = time;
+        surface.uPhoenixLife.value = isStatic ? 0 : 1;
+        surface.uPhoenixScatter.value = pose.scatter;
+        surface.uPhoenixBlock.value = pose.block;
+        halo.mesh.position.copy(bird.position);
+        halo.mesh.position.z = -1.5;
+        halo.mesh.scale.copy(bird.scale);
+        halo.mesh.visible = bird.visible;
+        energy.points.visible = bird.visible;
         energy.points.position.copy(bird.position);
         energy.points.scale.copy(bird.scale);
         energy.material.uniforms.uTime.value = time;
@@ -300,6 +434,8 @@ export function createScene(options: SceneOptions): SceneHandle {
         backdrop.position.x = pose.x;
         backdrop.visible = pose.night < 0.3;
         background.copy(lightColor).lerp(nightColor, pose.night);
+        if (bird.visible)
+          bloom.prepare(scene, camera, preset.iridescence, preset.glow);
         renderer.setScissorTest(false);
         renderer.setViewport(0, 0, width, height);
         renderer.setClearColor(background, 0);
@@ -313,13 +449,24 @@ export function createScene(options: SceneOptions): SceneHandle {
           if (gallery.top > 0) {
             renderer.setScissor(0, height - gallery.top, width, gallery.top);
             renderer.render(scene, camera);
+            if (!initialTriangles)
+              initialTriangles = renderer.info.render.triangles;
+            if (bird.visible) bloom.render();
           }
           if (gallery.bottom < height) {
             renderer.setScissor(0, 0, width, height - gallery.bottom);
             renderer.render(scene, camera);
+            if (!initialTriangles)
+              initialTriangles = renderer.info.render.triangles;
+            if (bird.visible) bloom.render();
           }
           renderer.setScissorTest(false);
-        } else renderer.render(scene, camera);
+        } else {
+          renderer.render(scene, camera);
+          if (!initialTriangles)
+            initialTriangles = renderer.info.render.triangles;
+          if (bird.visible) bloom.render();
+        }
         if (slots.length) {
           const bounds = slots.map((slot) => slot.getBoundingClientRect());
           renderer.autoClear = false;
@@ -332,16 +479,22 @@ export function createScene(options: SceneOptions): SceneHandle {
             renderer.clearDepth();
             crystalCamera.aspect = r.width / r.height;
             crystalCamera.updateProjectionMatrix();
+            const explored = slots[i].dataset.discovered === "true";
             crystals.forEach((c, index) => {
               c.visible = index === i;
+              awakened[index].visible = index === i && explored;
             });
-            crystals[i].rotation.y =
-              0.3 + i * 0.7 + (isStatic ? 0 : time * 0.08);
+            crystalMaterials[i].emissive.set(
+              ["#b88af0", "#55cce9", "#a8cf7b"][i],
+            );
+            crystalMaterials[i].emissiveIntensity = explored ? 0.4 : 0.11;
+            crystals[i].rotation.y = 0.3 + i * 0.7;
             const active = slots[i]
               .closest("button")
               ?.matches(":hover, :focus-visible");
             const scale = active ? 1.08 : 1;
             crystals[i].scale.set(0.72 * scale, 1.12 * scale, 0.65 * scale);
+            awakened[i].scale.setScalar(scale);
             renderer.render(crystalScene, crystalCamera);
           }
           renderer.setScissorTest(false);
@@ -366,6 +519,8 @@ export function createScene(options: SceneOptions): SceneHandle {
       height = parent.clientHeight;
       if (!width || !height || dead) return;
       renderer.setSize(width, height, false);
+      bloom.resize(width, height);
+      canvas.dataset.bloomBytes = String(bloom.bytes);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       render();
@@ -419,32 +574,82 @@ export function createScene(options: SceneOptions): SceneHandle {
     });
     function update(value: Preset) {
       preset = value;
-      const palette = palettes[preset.palette];
+      const palette = {
+        iridescent: { color: "#8b47d9", edge: "#7432bf", light: "#ef56b7" },
+        holo: { color: "#267bcf", edge: "#1262a6", light: "#32e8ff" },
+        magma: { color: "#ef7531", edge: "#aa3151", light: "#ffc85a" },
+      }[preset.appearance];
+      const look = preset.appearance;
+      appearance.uAetherLook.value = {
+        iridescent: 1,
+        holo: 2,
+        magma: 3,
+      }[look];
+      appearance.uAetherIridescence.value = preset.iridescence;
+      appearance.uAetherGlow.value = preset.glow;
+      appearance.uAetherDispersion.value = preset.dispersion;
+      appearance.uAetherHue.value = 0;
+      appearance.uAetherPrimary.value.set(palette.color);
+      appearance.uAetherAccent.value.set(palette.light);
       materials.forEach((material, i) => {
         material.color
           .set(palette.color)
-          .lerp(new THREE.Color("#ffffff"), 0.65 + i * 0.08);
+          .lerp(new THREE.Color("#ffffff"), 0.03);
         material.attenuationColor.set(palette.edge);
         contourUpdates[i](palette.edge, preset.dispersion);
+        material.transmission = 0;
+        material.metalness = look === "iridescent" ? 0.35 : 0;
+        material.roughness = 0.2;
+        material.clearcoat = look === "iridescent" ? 0.9 : 0.35;
+        material.envMapIntensity = 1.25;
         material.dispersion = 0.03 + preset.dispersion * 0.97;
-        material.iridescence = 0.1 + preset.dispersion * 0.5;
+        material.iridescence = preset.iridescence;
+        material.iridescenceIOR = 1.65;
+        material.iridescenceThicknessRange = [180, 650];
         material.emissive.set(palette.light);
-        material.emissiveIntensity = preset.glow * 0.09;
+        material.emissiveIntensity = preset.glow * 0.25;
+        const wireframe = look === "holo";
+        if (material.wireframe !== wireframe) {
+          material.wireframe = wireframe;
+          material.needsUpdate = true;
+        }
       });
       energy.material.uniforms.uColor.value.set(palette.edge);
       energy.material.uniforms.uGlow.value = preset.glow;
+      halo.material.uniforms.uGlow.value =
+        (preset.glow * 1.3 + preset.iridescence * 0.9) * 1.8;
+      halo.material.uniforms.uColor.value.set(
+        look === "magma"
+          ? "#f39b27"
+          : look === "holo"
+            ? "#228bd4"
+            : palette.light,
+      );
+      canvas.dataset.appearance = look;
+      canvas.dataset.flapEnabled = String(preset.flapEnabled);
+      canvas.dataset.flapSpeed = String(preset.flapSpeed);
+      canvas.dataset.iridescence = String(preset.iridescence);
+      canvas.dataset.wingSpread = String(preset.wingSpread);
+      canvas.dataset.dispersion = String(preset.dispersion);
+      canvas.dataset.glow = String(preset.glow);
       energy.material.uniforms.uDpr.value = dpr;
       render();
     }
     update(preset);
     resize();
     canvas.dataset.quality = low ? "low" : "high";
+    canvas.dataset.feathers = String(phoenix.metrics.feathers);
+    canvas.dataset.featherBatches = String(phoenix.metrics.batches);
+    canvas.dataset.tailRibbons = String(phoenix.metrics.tailRibbons);
     const uniqueGeometry = new Set<THREE.BufferGeometry>();
     let geometryBytes = 0;
     for (const tree of [scene, crystalScene])
       tree.traverse((object) => {
         const g = (object as THREE.Mesh).geometry;
         if (g) uniqueGeometry.add(g);
+        const instanced = object as THREE.InstancedMesh;
+        if (instanced.isInstancedMesh)
+          geometryBytes += instanced.instanceMatrix.array.byteLength;
       });
     uniqueGeometry.forEach((g) => {
       Object.values(g.attributes).forEach((a) => {
@@ -453,11 +658,24 @@ export function createScene(options: SceneOptions): SceneHandle {
       if (g.index) geometryBytes += g.index.array.byteLength;
     });
     canvas.dataset.geometryBytes = String(geometryBytes);
+    // r186 caches a six-index line list per triangle after first entering wireframe.
+    const wireGeometry = new Set<THREE.BufferGeometry>();
+    bird.traverse((object) => {
+      const geometry = (object as THREE.Mesh).geometry;
+      if (geometry) wireGeometry.add(geometry);
+    });
+    let wireframeBytes = 0;
+    wireGeometry.forEach((geometry) => {
+      const count = geometry.getAttribute("position").count;
+      wireframeBytes +=
+        (geometry.index?.count ?? count) * 2 * (count >= 65535 ? 4 : 2);
+    });
+    canvas.dataset.wireframeBytes = String(wireframeBytes);
     canvas.dataset.environmentBytes = String(
       environment.width * environment.height * 8,
     );
     canvas.dataset.fieldBytes = String(512 * 512 * 4);
-    canvas.dataset.triangles = String(renderer.info.render.triangles);
+    canvas.dataset.triangles = String(initialTriangles);
     onReady();
     if (!isStatic) frame = requestAnimationFrame(animate);
     return {
@@ -472,6 +690,7 @@ export function createScene(options: SceneOptions): SceneHandle {
         canvas.removeEventListener("webglcontextlost", contextLost);
         compactQuery.removeEventListener("change", changeCompact);
         disposeObjects(scene, crystalScene);
+        bloom.dispose();
         fieldTexture.dispose();
         environment.dispose();
         renderer.dispose();
@@ -498,6 +717,8 @@ function disposeObjects(...trees: THREE.Object3D[]) {
   for (const tree of trees)
     tree.traverse((object) => {
       const mesh = object as THREE.Mesh;
+      if ((mesh as THREE.InstancedMesh).isInstancedMesh)
+        (mesh as THREE.InstancedMesh).dispose();
       if (mesh.geometry) geometries.add(mesh.geometry);
       if (mesh.material)
         (Array.isArray(mesh.material)

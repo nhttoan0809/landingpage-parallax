@@ -1,7 +1,11 @@
 {
   "schema": "aether.phoenix",
-  "version": 1,
-  "palette": "tide",
+  "version": 4,
+  "appearance": "iridescent",
   "dispersion": 0.9,
-  "glow": 0.85
+  "glow": 0.85,
+  "iridescence": 0.8,
+  "flapEnabled": true,
+  "flapSpeed": 1,
+  "wingSpread": 0.75
 }

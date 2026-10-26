@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import {
   defaultPreset,
-  palettes,
   parsePreset,
   serializePreset,
   storageKey,
   type Preset,
 } from "./preset";
+import { appearances } from "./appearances";
 import type { Quality } from "./scene";
 import styles from "./Aether.module.css";
 
@@ -37,67 +37,36 @@ export default function Customizer({
   return (
     <div className={styles.controls}>
       <div className={styles.controlIntro}>
-        <span>Material study</span>
+        <span>Your phoenix, gathered here</span>
         <span aria-hidden="true">↗</span>
       </div>
-      <fieldset className={styles.palette}>
-        <legend>Choose a palette</legend>
-        <div>
-          {Object.entries(palettes).map(([key, p]) => (
-            <label
-              key={key}
-              style={{ "--swatch": p.color } as React.CSSProperties}
-            >
-              <input
-                type="radio"
-                name="palette"
-                value={key}
-                checked={preset.palette === key}
-                onChange={() => {
-                  onChange({ ...preset, palette: key as Preset["palette"] });
-                  report(`${p.name} palette applied.`);
-                }}
-              />
-              <span className={styles.swatch} aria-hidden="true" />
-              <span>{p.name}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-      <label className={styles.range}>
-        <span>
-          Dispersion <output>{Math.round(preset.dispersion * 100)}%</output>
-        </span>
-        <input
-          aria-label="Dispersion"
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={preset.dispersion}
-          onChange={(e) =>
-            onChange({ ...preset, dispersion: Number(e.target.value) })
-          }
-        />
-        <small>From quiet glass to a spectrum of colour.</small>
-      </label>
-      <label className={styles.range}>
-        <span>
-          Inner glow <output>{Math.round(preset.glow * 100)}%</output>
-        </span>
-        <input
-          aria-label="Inner glow"
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={preset.glow}
-          onChange={(e) =>
-            onChange({ ...preset, glow: Number(e.target.value) })
-          }
-        />
-        <small>A little energy, held in the light.</small>
-      </label>
+      <div
+        className={styles.portraitSummary}
+        aria-label="Your phoenix settings"
+      >
+        <p>
+          <span>Appearance</span>
+          <strong>{appearances[preset.appearance].name}</strong>
+        </p>
+        <p>
+          <span>Rhythm</span>
+          <strong>
+            {preset.flapEnabled
+              ? `${preset.flapSpeed.toFixed(2)}× wingbeats`
+              : "A quiet glide"}
+          </strong>
+        </p>
+        <p>
+          <span>Wings</span>
+          <strong>{Math.round(preset.wingSpread * 100)}% open</strong>
+        </p>
+        <p>
+          <span>Light</span>
+          <strong>{Math.round(preset.iridescence * 100)}% iridescence</strong>
+        </p>
+        <a href="#formation">Revisit its rhythm ↗</a>
+        <a href="#rebirth">Revisit its light ↗</a>
+      </div>
       <label className={styles.quality}>
         Render quality{" "}
         <select
@@ -132,7 +101,7 @@ export default function Customizer({
           className={styles.textButton}
           onClick={() => {
             onChange({ ...defaultPreset });
-            report("The original Opal study is restored.");
+            report("The original Iridescent study is restored.");
           }}
         >
           Reset
@@ -163,7 +132,7 @@ export default function Customizer({
             );
             const link = document.createElement("a");
             link.href = url;
-            link.download = `aether-${preset.palette}.json`;
+            link.download = `aether-${preset.appearance}.json`;
             document.body.append(link);
             link.click();
             link.remove();

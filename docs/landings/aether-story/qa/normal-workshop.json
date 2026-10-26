@@ -1,0 +1,26 @@
+{
+  "base": "http://127.0.0.1:4184/",
+  "date": "2026-10-26T08:00:07.409Z",
+  "browser": "155.0.8059.85",
+  "checks": [
+    "Both chapter controls update one live scene; native keyboard switch/range controls; all settings survive save/reset/restore and JSON export",
+    "Legacy v1 JSON imports with safe defaults for new attributes",
+    "Captured full-page-bottom portrait above footer for visual inspection",
+    "Each wing/light attribute changes the frozen WebGL preview independently; reduced motion remains pixel-still",
+    "Mobile chapter sculpture slots, final portrait and footer captured; no horizontal overflow"
+  ],
+  "errors": [],
+  "footer": {
+    "x": 0,
+    "y": 610.890625,
+    "width": 1440,
+    "height": 289.1875
+  },
+  "staticChanges": [
+    "Wing openness",
+    "Iridescence",
+    "Dispersion",
+    "Inner glow"
+  ],
+  "pass": true
+}

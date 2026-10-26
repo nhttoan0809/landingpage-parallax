@@ -1498,3 +1498,349 @@
   bottom: 10px;
   max-width: calc(100% - 20px);
 }
+
+/* Each chapter gives the creature one new part of its identity. */
+.formation {
+  justify-content: flex-end;
+  min-height: 1080px;
+}
+.formation .chapterCopy {
+  width: min(40vw, 430px);
+}
+.formation .staticFigure {
+  left: 0;
+  right: auto;
+  width: 55%;
+}
+.chapterControls {
+  border: 0;
+  border-top: 1px solid #cfc7dc;
+  padding: 24px 0 0;
+  margin: 30px 0;
+  min-width: 0;
+  text-align: left;
+}
+.chapterControls legend {
+  font-size: 13px;
+  padding: 0 14px 0 0;
+  color: var(--ink);
+}
+.chapterControls .range {
+  margin-bottom: 19px;
+}
+.chapterControls .range small {
+  font-size: 11px;
+  line-height: 1.6;
+}
+.flightToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 21px;
+  min-height: 56px;
+  cursor: pointer;
+}
+.flightToggle strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.flightToggle small {
+  display: block;
+  max-width: 270px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 7px;
+}
+.flightToggle input {
+  appearance: none;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 28px;
+  border: 1px solid #b9abc9;
+  border-radius: 20px;
+  background: #e0dbe7;
+  position: relative;
+  cursor: pointer;
+}
+.flightToggle input::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  left: 3px;
+  top: 3px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 4px #27253622;
+}
+.flightToggle input:checked {
+  background: #785c91;
+  border-color: #785c91;
+}
+.flightToggle input:checked::after {
+  transform: translateX(18px);
+}
+.flightToggle input:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.chapterHint {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 15px 0 0;
+}
+.rebirth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: center;
+  text-align: left;
+  min-height: 1100px;
+  padding-top: 130px;
+  padding-bottom: 130px;
+}
+.rebirthCopy {
+  max-width: 430px;
+}
+.rebirth h2 {
+  font-size: clamp(54px, 5vw, 76px);
+  line-height: 0.98;
+}
+.lightStory {
+  font-size: 14px;
+  line-height: 1.9;
+  margin-top: 28px;
+  color: #575262;
+  max-width: 365px;
+}
+.rebirthSculpture {
+  min-height: 480px;
+}
+.rebirthPoster {
+  width: 100%;
+  height: 600px;
+  margin: 0;
+}
+.customizer {
+  min-height: 1050px;
+  padding-bottom: 150px;
+}
+.customizerVisual {
+  position: sticky;
+  top: 80px;
+}
+.finalSculpture {
+  width: 118%;
+  margin-left: -9%;
+  height: clamp(540px, 50vh, 660px);
+  margin-top: 12px;
+}
+.portraitSummary {
+  border-top: 1px solid #ddd5e5;
+  border-bottom: 1px solid #ddd5e5;
+  padding: 20px 0;
+  margin: 0 0 25px;
+  display: grid;
+  gap: 14px;
+}
+.portraitSummary p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 15px;
+  font-size: 12px;
+}
+.portraitSummary p span {
+  color: var(--muted);
+}
+.portraitSummary strong {
+  font-weight: 400;
+}
+.portraitSummary a {
+  font-size: 11px;
+  color: #785c91;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border-bottom: 1px solid #b5a3c6;
+}
+@media (max-width: 767px) {
+  .formation,
+  .page[data-static="true"] .formation {
+    min-height: 0;
+  }
+  .formation .chapterCopy {
+    width: 100%;
+    max-width: none;
+  }
+  .formation .staticFigure {
+    position: relative;
+    width: 110%;
+    left: -5%;
+    right: auto;
+    bottom: auto;
+    margin-top: 25px;
+  }
+  .formationSculpture {
+    height: 400px;
+    margin-top: 20px;
+  }
+  .rebirth,
+  .page[data-static="true"] .rebirth {
+    display: block;
+    min-height: 0;
+    padding-top: 100px;
+    padding-bottom: 70px;
+  }
+  .rebirth h2 {
+    font-size: 56px;
+  }
+  .lightStory {
+    font-size: 13px;
+  }
+  .rebirthSculpture {
+    height: 420px;
+    min-height: 0;
+    margin-top: 25px;
+  }
+  .rebirthPoster {
+    height: 380px;
+    width: 110%;
+    margin: 10px -5% 0;
+  }
+  .customizer {
+    min-height: 0;
+    padding-bottom: 90px;
+  }
+  .customizerVisual {
+    position: relative;
+    top: auto;
+    min-height: 0;
+  }
+  .finalSculpture {
+    width: 100%;
+    margin-left: 0;
+    height: 430px;
+    margin-top: 12px;
+    margin-bottom: 25px;
+  }
+  .chapterControls {
+    margin: 27px 0;
+  }
+  .chapterControls .range {
+    margin-bottom: 23px;
+  }
+  .flightToggle small {
+    max-width: 230px;
+  }
+  .page[data-static="true"] .customizerVisual {
+    min-height: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flightToggle input::after {
+    transition: none;
+  }
+}
+
+.appearanceChoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 25px;
+}
+.appearanceChoices label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 53px;
+  padding: 9px 10px;
+  border: 1px solid #cec4dc;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  font-size: 11px;
+  background: #faf9fc80;
+}
+.appearanceChoices label:has(input:checked) {
+  border-color: #785c91;
+  background: #e4dbee;
+  box-shadow: inset 0 0 0 1px #785c91;
+}
+.appearanceChoices label:has(input:focus-visible) {
+  outline: 2px solid #58319b;
+  outline-offset: 3px;
+}
+.appearanceChoices input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.appearanceSwatch {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  border: 1px solid #49345c33;
+}
+.appearanceDescription {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #575262;
+  min-height: 38px;
+  padding-top: 4px;
+}
+
+.discoveryState {
+  display: block;
+  color: #b7adca;
+  font-size: 10px;
+  margin: 5px 0 16px;
+  letter-spacing: 0.02em;
+}
+.caseCard[data-discovered="true"] .discoveryState {
+  color: #d6f6e7;
+}
+.caseCard[data-discovered="true"] .crystalButton {
+  border-color: #a8d5c144;
+  background: #c7f8df06;
+}
+.crystalSlot {
+  height: auto;
+  aspect-ratio: 5 / 4;
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.crystalSlot img {
+  opacity: 1;
+}
+.crystalButton:hover .crystalSlot img,
+.crystalButton:focus-visible .crystalSlot img {
+  transform: scale(1.08);
+}
+.portraitSummary {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.crystalButton:hover,
+.crystalButton:focus-visible,
+.caseCard[data-discovered="true"] .crystalButton {
+  background: transparent;
+}
+.appearanceChoices label:last-of-type {
+  grid-column: 1 / -1;
+}

@@ -9,6 +9,7 @@ import type { Quality } from "./scene";
 import { useSound } from "./useSound";
 import CaseDialog, { CaseContent } from "./CaseDialog";
 import Customizer from "./Customizer";
+import ChapterControls from "./ChapterControls";
 import styles from "./Aether.module.css";
 
 import SceneView from "./SceneView";
@@ -26,6 +27,9 @@ export default function App() {
   const [active, setActive] = useState("spark");
   const lastChapter = useRef("spark");
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null);
+  const [discovered, setDiscovered] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
   const [readAll, setReadAll] = useState(false);
   const [preset, setPreset] = useState({ ...defaultPreset });
   const [quality, setQuality] = useState<Quality>("auto");
@@ -43,8 +47,8 @@ export default function App() {
     () => {
       if (isStatic || !root.current) return;
       gsap.registerPlugin(ScrollTrigger);
-      const sections = [...chapters, "reimagine"].map(
-        (id) => root.current!.querySelector<HTMLElement>(`#${id}`)!,
+      const sections = [...chapters, "reimagine"].map((id) =>
+        root.current!.querySelector<HTMLElement>(`#${id}`)!,
       );
       let offsets = sections.map((section) => section.offsetTop);
       const scrollPosition = { value: 0 };
@@ -58,6 +62,10 @@ export default function App() {
           invalidateOnRefresh: true,
           onRefresh: () => {
             offsets = sections.map((section) => section.offsetTop);
+            journey.current.progress = progressAt(
+              scrollPosition.value * offsets[4],
+              offsets,
+            );
           },
           onUpdate: (self) => {
             const next = chapterAt(progressAt(self.scroll() + 0.5, offsets));
@@ -72,12 +80,12 @@ export default function App() {
         scrollPosition,
         { value: 0 },
         {
-          value: () => sections[4].offsetTop,
+          value: 1,
           ease: "none",
           duration: 1,
           onUpdate: () => {
             journey.current.progress = progressAt(
-              scrollPosition.value,
+              scrollPosition.value * offsets[4],
               offsets,
             );
           },
@@ -215,7 +223,7 @@ export default function App() {
               onError={(e) => {
                 e.currentTarget.src = `${asset}poster.svg`;
               }}
-              alt="A glass phoenix with a sculpted head, layered wings and a long ribbon tail"
+              alt="An iridescent phoenix with a sculpted head, layered wings and a long ribbon tail"
               width="1000"
               height="1000"
             />
@@ -264,23 +272,16 @@ export default function App() {
               <br />a form.
             </h2>
             <p>
-              An idea starts as a feeling. A glimpse of something that could be.
-              We follow that thread until it becomes a world you can step
-              inside.
+              A shape becomes a creature when it finds its rhythm. Give your
+              phoenix a gentle wingbeat, a restless pulse, or the stillness of a
+              glide.
             </p>
-            <div className={styles.formationNotes}>
-              <p>
-                <span>Find the spark</span>Listen for the thought that won’t let
-                go.
-              </p>
-              <p>
-                <span>Build the wings</span>Give every detail a reason to exist.
-              </p>
-              <p>
-                <span>Let it move you</span>Make an experience worth
-                remembering.
-              </p>
-            </div>
+            <ChapterControls
+              kind="flight"
+              preset={preset}
+              onChange={setPreset}
+              reduced={isStatic}
+            />
             <a className={styles.textButton} href="#resonance">
               Discover the echoes <span aria-hidden="true">↓</span>
             </a>
@@ -296,7 +297,7 @@ export default function App() {
             <figure className={styles.staticFigure}>
               <img
                 src={`${asset}poster.webp`}
-                alt="The phoenix’s individual glass feathers fan out into two open wings"
+                alt="The phoenix’s individual feathers fan out into two open wings"
                 width="1000"
                 height="1000"
               />
@@ -322,31 +323,50 @@ export default function App() {
           </div>
           <div className={styles.caseGrid}>
             {cases.map((study, i) => (
-              <article key={study.id} className={styles.caseCard}>
+              <article
+                key={study.id}
+                className={styles.caseCard}
+                data-discovered={discovered.has(study.id)}
+              >
                 <button
                   className={styles.crystalButton}
                   onClick={() => {
                     sound.chime(i);
+                    setDiscovered((previous) =>
+                      new Set(previous).add(study.id),
+                    );
                     setSelectedCase(study);
                   }}
                   onPointerEnter={() => sound.chime(i)}
                   onFocus={() => sound.chime(i)}
                   aria-label={`Explore ${study.name} case study`}
                 >
-                  <span className={styles.crystalSlot} data-crystal-slot>
+                  <span
+                    className={styles.crystalSlot}
+                    data-crystal-slot
+                    data-discovered={discovered.has(study.id)}
+                  >
                     <img
                       className={styles.crystalFallback}
-                      src={`${asset}${study.id}-crystal.svg`}
+                      src={`${asset}${study.id}-crystal${discovered.has(study.id) ? "-awakened" : ""}.webp`}
                       alt=""
                       width="300"
                       height="240"
                     />
                   </span>
+                  <span className={styles.discoveryState}>
+                    {discovered.has(study.id)
+                      ? "Story discovered"
+                      : "A story waiting"}
+                  </span>
                   <span className={styles.caseCategory}>{study.category}</span>
                   <h3>{study.name}</h3>
                   <span className={styles.caseLine}>{study.line}</span>
                   <span className={styles.caseOpen}>
-                    Explore concept <span aria-hidden="true">↗</span>
+                    {discovered.has(study.id)
+                      ? "Revisit concept"
+                      : "Explore concept"}{" "}
+                    <span aria-hidden="true">↗</span>
                   </span>
                 </button>
               </article>
@@ -389,14 +409,35 @@ export default function App() {
           className={`${styles.chapter} ${styles.rebirth}`}
           aria-labelledby="rebirth-title"
         >
-          <div>
+          <div className={styles.rebirthCopy}>
             <p className={styles.chapterIndex}>04 / Rebirth</p>
             <h2 id="rebirth-title">
-              Never the same.
+              Give your phoenix
               <br />
-              Always becoming.
+              its own light.
             </h2>
+            <p className={styles.lightStory}>
+              It returns with the rhythm you gave it. Now choose what it
+              becomes: a shifting spectrum, a drawing made of light, or an ember
+              brought back to life.
+            </p>
+            <ChapterControls
+              kind="light"
+              preset={preset}
+              onChange={setPreset}
+              reduced={isStatic}
+            />
+            <a className={styles.textButton} href="#reimagine">
+              See your phoenix, complete <span aria-hidden="true">↗</span>
+            </a>
           </div>
+          {!isStatic && (
+            <div
+              className={styles.rebirthSculpture}
+              data-rebirth-slot
+              aria-hidden="true"
+            />
+          )}
           {isStatic && (
             <img
               className={styles.rebirthPoster}
@@ -406,15 +447,6 @@ export default function App() {
               height="1000"
             />
           )}
-          <div className={styles.rebirthBottom}>
-            <p>
-              What begins as a spark can become something extraordinary.
-              <br /> The next possibility is yours to shape.
-            </p>
-            <a className={styles.primaryButton} href="#reimagine">
-              Reimagine the phoenix <span aria-hidden="true">↗</span>
-            </a>
-          </div>
         </section>
         <section
           id="reimagine"
@@ -429,10 +461,17 @@ export default function App() {
               your own.
             </h2>
             <p>
-              Change its colour. Shift its energy.
+              Your rhythm. Your light. One unmistakable phoenix.
               <br />
-              See what else it could become.
+              Keep its light. Save what you have made.
             </p>
+            {!isStatic && (
+              <div
+                className={styles.finalSculpture}
+                data-final-slot
+                aria-hidden="true"
+              />
+            )}
             {isStatic && (
               <div className={styles.staticPreview}>
                 <img
@@ -454,14 +493,6 @@ export default function App() {
             {!ready && !isStatic && (
               <img
                 className={styles.customizerPoster}
-                style={{
-                  filter:
-                    preset.palette === "tide"
-                      ? "hue-rotate(65deg)"
-                      : preset.palette === "ember"
-                        ? "hue-rotate(290deg)"
-                        : undefined,
-                }}
                 src={`${asset}poster.webp`}
                 alt="Illustrated phoenix preview. Live material rendering requires a compatible GPU."
                 width="1000"

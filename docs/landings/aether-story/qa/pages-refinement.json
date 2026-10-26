@@ -1,0 +1,160 @@
+{
+  "base": "http://127.0.0.1:4185/landingpage-parallax/",
+  "date": "2026-10-26T08:07:12.963Z",
+  "checks": [
+    "Exactly three appearances; Glass and the palette chooser are removed",
+    "Exploring a story awakens its core/orbit, and the discovered state survives switching to static reading; motion/static colours agree",
+    "Larger final sculpture reviewed at 1440/2404 desktop and 390 mobile; footer states and overflow checked",
+    "Preset v4 persists appearance and numeric controls without a palette field"
+  ],
+  "errors": [],
+  "crystalComparison": [
+    {
+      "i": 0,
+      "motion": {
+        "rgb": [
+          189.1654632515011,
+          172.3617846013529,
+          207.39796306148818
+        ],
+        "count": 13157
+      },
+      "static": {
+        "rgb": [
+          186.09714417673774,
+          169.65337541374797,
+          203.8879224078208
+        ],
+        "count": 12991
+      },
+      "absoluteChannelDelta": [
+        3.068319074763366,
+        2.7084091876049285,
+        3.5100406536673745
+      ]
+    },
+    {
+      "i": 1,
+      "motion": {
+        "rgb": [
+          143.27370958357577,
+          170.3065414346272,
+          183.67941152023937
+        ],
+        "count": 12031
+      },
+      "static": {
+        "rgb": [
+          141.997290661248,
+          168.68106002878673,
+          182.24621115908897
+        ],
+        "count": 11811
+      },
+      "absoluteChannelDelta": [
+        1.276418922327764,
+        1.6254814058404747,
+        1.4332003611503978
+      ]
+    },
+    {
+      "i": 2,
+      "motion": {
+        "rgb": [
+          164.6732399557685,
+          173.44157758938445,
+          158.74041651308514
+        ],
+        "count": 10852
+      },
+      "static": {
+        "rgb": [
+          164.4742953460062,
+          172.8414645566064,
+          158.56503417923025
+        ],
+        "count": 10679
+      },
+      "absoluteChannelDelta": [
+        0.19894460976232153,
+        0.6001130327780402,
+        0.1753823338548841
+      ]
+    }
+  ],
+  "portraits": [
+    {
+      "width": 1440,
+      "height": 900,
+      "slot": {
+        "x": 61.3125,
+        "y": 365.890625,
+        "width": 706.53125,
+        "height": 540
+      },
+      "footer": {
+        "x": 0,
+        "y": 1055.890625,
+        "width": 1440,
+        "height": 289.1875
+      },
+      "bounds": {
+        "left": 235,
+        "right": 755,
+        "top": 446,
+        "bottom": 783,
+        "count": 37387,
+        "centerX": 460.0058843983203
+      }
+    },
+    {
+      "width": 2404,
+      "height": 1268,
+      "slot": {
+        "x": 102.359375,
+        "y": 373.21875,
+        "width": 1179.5,
+        "height": 634
+      },
+      "footer": {
+        "x": 0,
+        "y": 1157.21875,
+        "width": 2404,
+        "height": 289.1875
+      },
+      "bounds": {
+        "left": 385,
+        "right": 1174,
+        "top": 480,
+        "bottom": 929,
+        "count": 73960,
+        "centerX": 722.7466738777717
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "slot": {
+        "x": 25,
+        "y": 319.53125,
+        "width": 340,
+        "height": 430
+      },
+      "footer": {
+        "x": 0,
+        "y": 1457.53125,
+        "width": 390,
+        "height": 506.5625
+      },
+      "bounds": {
+        "left": 68,
+        "right": 349,
+        "top": 460,
+        "bottom": 624,
+        "count": 8999,
+        "centerX": 201.38893210356707
+      }
+    }
+  ],
+  "pass": true
+}

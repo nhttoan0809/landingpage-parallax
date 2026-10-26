@@ -1,0 +1,53 @@
+{
+  "base": "http://127.0.0.1:4184/",
+  "date": "2026-10-26T07:59:49.588Z",
+  "browser": "155.0.8059.85",
+  "checks": [
+    "Three live finishes reuse one canvas; Holo uses real GL.LINES; v4 save/restore/export/invalid import and v2 migration pass",
+    "All three static WebGL finishes remain pixel-still and distinct; iridescence 0→1 raises measured coloured-pixel luminance; repeated switches reuse warmed shader programs",
+    "All finishes work on compact low tier, retain selected appearance through quality reload, and do not overflow"
+  ],
+  "errors": [],
+  "modes": [
+    {
+      "key": "iridescent",
+      "name": "Iridescent GLSL",
+      "draws": {
+        "lines": 0,
+        "triangles": 801
+      }
+    },
+    {
+      "key": "holo",
+      "name": "Holo Wireframe",
+      "draws": {
+        "lines": 558,
+        "triangles": 243
+      }
+    },
+    {
+      "key": "magma",
+      "name": "Solar Magma GLSL",
+      "draws": {
+        "lines": 0,
+        "triangles": 801
+      }
+    }
+  ],
+  "iridescence": [
+    {
+      "value": "0",
+      "colouredPixels": 22490,
+      "meanColouredLuma": 56.11742802134273,
+      "meanChroma": 102.45113383726101
+    },
+    {
+      "value": "1",
+      "colouredPixels": 24955,
+      "meanColouredLuma": 169.8537125545943,
+      "meanChroma": 63.68591464636346
+    }
+  ],
+  "warmedProgramCount": 22,
+  "pass": true
+}

@@ -1,25 +1,29 @@
 {
-  "method": "Conservative raw file total: Aether HTML, all static and dynamic JS/CSS manifest dependencies, and EVERY file in the Aether public namespace, including unused previews, licenses and fallback assets. No gzip or cache discount. Generated GPU scene resources are counted separately; framebuffer allocations are excluded from geometry/texture counts.",
-  "totalBytes": 1063787,
-  "totalMiB": 1.0145063400268555,
+  "method": "Conservative raw file total: Aether HTML, all static and dynamic JS/CSS manifest dependencies, and EVERY file in the Aether public namespace, including unused previews, licenses and fallback assets. No gzip or cache discount. Generated GPU scene resources are counted separately; includes a conservative line-index cache for every phoenix triangle after entering Holo (r186: six indices per triangle, 16/32-bit according to vertex count); bounded HDR bloom render targets (RGBA16F × 3 plus conservative source depth) are counted; other renderer framebuffer allocations remain excluded.",
+  "totalBytes": 1194670,
+  "totalMiB": 1.1393260955810547,
   "firstExperienceLimitMiB": 18,
   "resources": [
     {
       "tier": "high",
-      "geometryBytes": 2389628,
+      "geometryBytes": 547764,
       "environmentBytes": 1572864,
       "fieldBytes": 1048576,
-      "totalBytes": 5011068,
-      "totalMiB": 4.778926849365234,
+      "wireframeBytes": 197760,
+      "bloomBytes": 2580480,
+      "totalBytes": 5947444,
+      "totalMiB": 5.671924591064453,
       "limitMiB": 8
     },
     {
       "tier": "low",
-      "geometryBytes": 2387708,
+      "geometryBytes": 312240,
       "environmentBytes": 688128,
       "fieldBytes": 1048576,
-      "totalBytes": 4124412,
-      "totalMiB": 3.9333457946777344,
+      "wireframeBytes": 103680,
+      "bloomBytes": 478464,
+      "totalBytes": 2631088,
+      "totalMiB": 2.5092010498046875,
       "limitMiB": 8
     }
   ],
@@ -29,32 +33,32 @@
       "bytes": 2299
     },
     {
-      "file": "dist/assets/aether-story-BHr-XggH.js",
-      "bytes": 28867
+      "file": "dist/assets/aether-story-wxF8ZwT7.js",
+      "bytes": 35008
     },
     {
-      "file": "dist/assets/aether-story-3MZVyC4r.css",
-      "bytes": 24893
+      "file": "dist/assets/aether-story-J829Azyt.css",
+      "bytes": 30864
     },
     {
-      "file": "dist/assets/client-DUzeO-QE.js",
-      "bytes": 187365
+      "file": "dist/assets/client-CHB1F1JA.js",
+      "bytes": 222577
     },
     {
-      "file": "dist/assets/preload-helper-BudHKwIL.js",
-      "bytes": 117053
+      "file": "dist/assets/preload-helper-BvPRdo-a.js",
+      "bytes": 115910
     },
     {
-      "file": "dist/assets/scene-DJIY0SF4.js",
-      "bytes": 17835
+      "file": "dist/assets/scene-CDwtlwMv.js",
+      "bytes": 35805
     },
     {
-      "file": "dist/assets/three.module-CbiTn_cx.js",
-      "bytes": 548487
+      "file": "dist/assets/three.module-8ePy9bbp.js",
+      "bytes": 550508
     },
     {
       "file": "public/landings/aether-story/THIRD_PARTY_NOTICES.txt",
-      "bytes": 1403
+      "bytes": 2442
     },
     {
       "file": "public/landings/aether-story/mark.svg",
@@ -66,31 +70,55 @@
     },
     {
       "file": "public/landings/aether-story/poster.webp",
-      "bytes": 39056
+      "bytes": 64130
     },
     {
       "file": "public/landings/aether-story/preview.webp",
-      "bytes": 23314
+      "bytes": 27302
+    },
+    {
+      "file": "public/landings/aether-story/sonora-crystal-awakened.webp",
+      "bytes": 7322
     },
     {
       "file": "public/landings/aether-story/sonora-crystal.svg",
       "bytes": 523
     },
     {
+      "file": "public/landings/aether-story/sonora-crystal.webp",
+      "bytes": 4936
+    },
+    {
       "file": "public/landings/aether-story/sonora.svg",
       "bytes": 3773
+    },
+    {
+      "file": "public/landings/aether-story/vela-crystal-awakened.webp",
+      "bytes": 7116
     },
     {
       "file": "public/landings/aether-story/vela-crystal.svg",
       "bytes": 523
     },
     {
+      "file": "public/landings/aether-story/vela-crystal.webp",
+      "bytes": 4328
+    },
+    {
       "file": "public/landings/aether-story/vela.svg",
       "bytes": 4662
     },
     {
+      "file": "public/landings/aether-story/verdant-crystal-awakened.webp",
+      "bytes": 6796
+    },
+    {
       "file": "public/landings/aether-story/verdant-crystal.svg",
       "bytes": 523
+    },
+    {
+      "file": "public/landings/aether-story/verdant-crystal.webp",
+      "bytes": 4112
     },
     {
       "file": "public/landings/aether-story/verdant.svg",

@@ -2,6 +2,8 @@
 
 Validated on 2026-10-23. This is an original fictional studio concept and a local static build, not a published site.
 
+> Historical baseline: this report describes the 2026-10-23 implementation. For the current articulated model and 2026-10-26 story/customization update, see [validation-v2.md](validation-v2.md). Shared QA filenames now contain the latest v2 render; the v1 comparison is preserved as `qa/before-v2-hero.png` and `qa/before-v2-formation.png`.
+
 ## Worktree and source preservation
 
 - Worktree: `/Users/toannguyen/Documents/personal-repos/landingpage-parallax-worktrees/aether-story`
